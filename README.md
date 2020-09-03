@@ -21,3 +21,5 @@ The profile and user information when you visit a user’s profile would be popu
 
 Each artwork, the artist’s username/id, and the “like” count will be stored in a database.
 
+The color palette – the hexadecimal values for each of the colors – would be also stored and accessed from a database
+
