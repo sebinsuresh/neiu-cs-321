@@ -10,7 +10,7 @@ import java.util.Arrays;
 @Controller
 public class DrawController {
 
-    @GetMapping("/draw.html")
+    @GetMapping("/draw")
     public String showDraw(){
         return "draw";
     }
