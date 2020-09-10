@@ -40,7 +40,7 @@ function draw() {
 
     text('◀ ▶ Press L/R arrow keys to switch colors.', drawStartX, height - 50);
     text('🖱   Left click to draw, Right Click to Erase.', drawStartX, height - 30);
-    text('⌨   R to reset.', drawStartX, height - 10);
+    text('🔄  Refresh to reset.', drawStartX, height - 10);
 
     stroke(0);
     noFill();
