@@ -13,9 +13,10 @@ body {
     font-family: 'Open Sans', sans-serif;
     font-size: 250%;
     font-weight: 400;
-    letter-spacing: 7px;
+    letter-spacing: 6px;
     word-spacing: 10px;
     text-transform: uppercase;
+    padding: 40px 0px;
 }
 
 .logoimg {
@@ -29,7 +30,7 @@ body {
 footer {
     position: fixed;
     bottom: 0px;
-    width: calc(100% - 80px);
+    width: calc(100% - 70px);
 
     background: #222;
     text-align: center;
@@ -39,4 +40,25 @@ footer {
 
     margin-left: -58px;
     padding: 20px 40px 60px 40px;
+}
+
+/*#p5CanvasDiv, */ .p5Canvas {
+    display:block;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px dashed black;
+    border-radius: 5px;
+}
+
+#dtitle {
+    font-family: 'Roboto', sans-serif;
+    font-size: 100%;
+    font-weight: 300;
+    text-align:center;
+    display:block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    padding: 20px 20px;
+    border-radius: 5px;
 }
