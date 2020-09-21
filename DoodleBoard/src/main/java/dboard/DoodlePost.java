@@ -11,7 +11,8 @@
 * transparency-enabled PNG files.
 * The doodles are also tiny, with dimensions of 64x64 pixels.
 * The doodles will be constructed by passing in a String of hex values representing the index of the color.
-* Values > 0xC will be made to be 0xC (color #000000/transparent). Thus each 'data' String will have a length of 4096.
+* Values greater than 0xB (hex B = decimal 11) will be made to be 0xB (color #000000/transparent).
+* Thus, each 'data' String will have a length of 4096.
 *
 *
 * Parameters:
@@ -42,25 +43,26 @@ import lombok.Data;
 import lombok.NonNull;
 import lombok.Setter;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
+
 @Data
 public class DoodlePost {
 
-    // Color palette to be used in doodles
-    public static final String[] PALETTE = {"#14141E", "#46282D", "#9B4146", "#BE783C", "#D7AF87", "#EBEBAF",
-                                            "#64AF50", "#556E6E", "#3C3C5F", "#96D2F0", "#A07DA0", "#000000"};
-    public static final int WIDTH = 64;
-    public static final int HEIGHT = 64;
-
-    private final int postId;           // ID of the doodle post.
-    private final String title;         // Title given to the doodle by the user.
-    private final int userId;           // ID of the user who posted it.
-    @NonNull                            // For data (a non-final field) to be included in the generated constructor.
-    private String data;                // String representing the pixel by pixel value of the doodle.
-    // private final int[][] data;      // int array representing the pixel by pixel value of the doodle.
+    //private int postId;           // ID of the doodle post.
+    @NotEmpty(message = "The title cannot be empty")
+    private String title;         // Title given to the doodle by the user.
+    //private int userId;           // ID of the user who posted it.
 
     @Setter(AccessLevel.NONE)           // No setters for this variable, use the incrLikes() and decrLikes() instead.
     private int numLikes = 0;           // Number of likes on the doodle.
 
+    @Valid
+    private Doodle content;
+
+    public DoodlePost(){
+        this.content = new Doodle();
+    }
 
     // Method to increase the likes on the doodle by one.
     // Returns true if increment was successful, false otherwise.

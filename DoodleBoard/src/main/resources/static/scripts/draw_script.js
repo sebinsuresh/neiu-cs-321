@@ -4,6 +4,7 @@ let drawStartX = 30, drawStartY=30;
 let pxSize = 10;
 let currCol;
 let isDrawing = false;
+let drawStrElem;
 
 // P5js' setup() function will occur once before the first draw() call occurs
 function setup() {
@@ -18,13 +19,17 @@ function setup() {
     palette = palette.substring(1, palette.length-1).split(", ");
     // console.log(palette);
 
+    drawStrElem = document.getElementById("drawingStr");
+    let initialDrawing = drawStrElem.value;
+
     // Initialize the 64x64 array
     drawing = [];
     for(let i = 0; i < 64; i++){
         drawing.push([]);
         for(let j = 0; j < 64; j++){
             // drawing[i].push(random(palette));
-            drawing[i].push("#000000");
+            // drawing[i].push("#000000");
+            drawing[i].push(palette[parseInt(initialDrawing.charAt(j*64 + i),16)])
         }
     }
 
@@ -60,6 +65,7 @@ function draw() {
     }
     drawPalette();
     handleMouse();
+    setDrawingString(); // set the drawingStr element value
 }
 
 // Clear the canvas by filling all pixels with transparent
@@ -124,20 +130,6 @@ function drawPalette(){
     noFill();
     square(drawStartX + currentCol * swatchSize + currentCol * paddingSize, startY, swatchSize);
     strokeWeight(1);
-}
-
-// Function to get the drawing String and assign it to the value of the hidden input element
-// with the id "drawingStr".
-function getDrawingString(){
-    let drawStrElem = document.getElementById("drawingStr");
-    let drawStr = "";
-    for(let i = 0; i < drawing.length; i++){
-        for(let j = 0; j < drawing.length; j++){
-            drawStr += palette.indexOf(drawing[i][j]).toString(16);
-        }
-        // drawStr += "\n";
-    }
-    drawStrElem.value = drawStr;
 }
 
 // Returns a vector with mouse position in drawing area
@@ -208,4 +200,17 @@ function prevColor(){
     currentCol = (currentCol - 1) % (palette.length);
     if(currentCol < 0)
         currentCol = palette.length-1;
+}
+
+// Function to get the drawing String and assign it to the value of the hidden input element
+// with the id "drawingStr". This value can then be used for form submission
+function setDrawingString(){
+    let drawStr = "";
+    for(let i = 0; i < drawing.length; i++){
+        for(let j = 0; j < drawing.length; j++){
+            drawStr += palette.indexOf(drawing[j][i]).toString(16);
+        }
+        // drawStr += "\n";
+    }
+    drawStrElem.value = drawStr;
 }

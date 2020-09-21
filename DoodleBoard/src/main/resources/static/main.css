@@ -19,6 +19,17 @@ body {
     padding: 40px 0px;
 }
 
+.simpleheading{
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 150%;
+    font-weight: 400;
+    letter-spacing: 2px;
+    word-spacing: 5px;
+    text-transform: uppercase;
+    padding: 40px 0px;
+}
+
 .logoimg {
     width: 320px;
     height: 320px;
@@ -46,6 +57,44 @@ body {
     margin-top: 30px;
     padding: 20px 20px;
     border-radius: 5px;
+    border-color: #000;
+    transition: border-color 0.3s ease;
+}
+
+#dtitle:hover{
+    border-color: #96d2f0;
+}
+
+#submitBtn {
+    display:block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    width: 200px;
+    height: 40px;
+    background: #ddd;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+#submitBtn:hover{
+    /*margin-top: 16px;*/
+    background: #eee;
+    cursor: pointer;
+}
+
+#drawingForm {
+    display:block;
+    width: 700px;
+    margin-left:auto;
+    margin-right:auto;
+    padding-top: 15px;
+}
+
+.errormsg {
+    color: #9b4146;
+    font-family: 'Roboto', sans-serif;
+    padding-bottom: 10px;
 }
 
 .palettes {
