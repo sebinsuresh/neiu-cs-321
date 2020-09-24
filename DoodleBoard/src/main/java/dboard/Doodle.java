@@ -43,7 +43,7 @@ public class Doodle {
             Scanner s = new Scanner(new File("./src/main/resources/static/data/empty_drawing.txt"));
             this.data = s.nextLine();
             s.close();
-            log.info("Empty drawing file found.");
+            // log.info("Empty drawing file found.");
 
         } catch(FileNotFoundException ex){
             log.info("Empty drawing file not found, populating manually");

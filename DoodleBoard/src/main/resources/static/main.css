@@ -121,6 +121,45 @@ body {
     display: inline;
 }
 
+.post {
+    display: block;
+    width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid #222222;
+    background: #fff;
+    padding: 30px;
+    padding-top: 45px;
+    margin-bottom: 40px;
+    border-radius: 10px;
+
+    /*https://www.cssmatic.com/box-shadow*/
+    -webkit-box-shadow: -1px 10px 11px 3px rgba(0,0,0,0.2);
+    -moz-box-shadow: -1px 10px 11px 3px rgba(0,0,0,0.2);
+    box-shadow: -1px 10px 11px 3px rgba(0,0,0,0.2);
+}
+
+.doodleCanvas{
+    width: 640px;
+    height: 640px;
+    background-color: white;
+    border: 1px solid #ccc;
+
+    -webkit-box-shadow: 0px 2px 2px 1px rgba(0,0,0,0.2);
+    -moz-box-shadow: 0px 2px 2px 1px rgba(0,0,0,0.2);
+    box-shadow: 0px 2px 2px 1px rgba(0,0,0,0.2);
+}
+
+.likeCount {
+    color: #14141E;
+    transition: color 0.3s ease;
+    cursor: pointer;
+}
+
+.likeCount:hover {
+    color: #9b4146;
+}
+
 footer {
     position: fixed;
     bottom: 0px;
