@@ -50,7 +50,7 @@
               th:if="${#fields.hasErrors('content.data')}"
             th:errors="*{content.data}">Drawing Error</span>
         <!-- Hidden input element which will store the drawing String in its value attribute -->
-        <input type="hidden" th:field="*{content.data}" id="drawingStr" name="data" th:value="${doodlepost.content.data}"/>
+        <input type="hidden" th:field="*{content.data}" id="drawingStr" />
 
         <!-- Text input to store title of the doodle -->
         <input type="text" size="40" placeholder="Enter your title for the doodle" th:field="*{title}" id="dtitle"/>

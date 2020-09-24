@@ -180,7 +180,7 @@ function handleMouse(){
 // Keycodes found using: http://keycode.info/
 function keyReleased(){
     if(keyCode == 82){ // 'R'
-        clearCanvas();
+        //clearCanvas();
     } else if(keyCode == RIGHT_ARROW){
         nextColor();
     } else if(keyCode == LEFT_ARROW) {

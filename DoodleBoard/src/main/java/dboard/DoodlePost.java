@@ -38,26 +38,28 @@
 * */
 package dboard;
 
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.NonNull;
-import lombok.Setter;
+import lombok.*;
 
+import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
+import java.time.LocalDateTime;
 
 @Data
+@Entity
 public class DoodlePost {
 
-    //private int postId;           // ID of the doodle post.
+    @Id()
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    public long postId;
     @NotEmpty(message = "The title cannot be empty")
     private String title;         // Title given to the doodle by the user.
-    //private int userId;           // ID of the user who posted it.
-
+    private LocalDateTime postedAt;
     @Setter(AccessLevel.NONE)           // No setters for this variable, use the incrLikes() and decrLikes() instead.
     private int numLikes = 0;           // Number of likes on the doodle.
 
     @Valid
+    @OneToOne
     private Doodle content;
 
     public DoodlePost(){
@@ -82,6 +84,11 @@ public class DoodlePost {
             return true;
         }
         return false;
+    }
+
+    @PrePersist
+    void postedAt(){
+        this.postedAt = LocalDateTime.now();
     }
 
 }

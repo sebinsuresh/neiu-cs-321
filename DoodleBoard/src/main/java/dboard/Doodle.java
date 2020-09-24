@@ -3,6 +3,10 @@ package dboard;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -13,13 +17,14 @@ import java.util.Scanner;
 
 @Data
 @Slf4j
+@Entity
 public class Doodle {
-    // Color palette to be used in doodles
-    public static final String[] PALETTE = {"#14141E", "#46282D", "#9B4146", "#BE783C", "#D7AF87", "#EBEBAF",
-            "#64AF50", "#556E6E", "#3C3C5F", "#96D2F0", "#A07DA0", "#000000"};
-
     public static final int WIDTH = 64;
     public static final int HEIGHT = 64;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long DoodleId;
 
     @NotNull(message="The doodle string can't be empty")
     @Pattern(regexp="^(?!b{4096}$)([a-f0-9 ]+)$", message = "The doodle can't be empty (draw something)")   // accepts everythng except 'b' 4096 times (original empty string)
