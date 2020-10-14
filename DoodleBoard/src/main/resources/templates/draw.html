@@ -15,16 +15,14 @@
     <script th:src="@{scripts/p5.min.js}"></script>
 </head>
 <body>
+    <br/><br/>
     <div class="pagetitle">
         <img th:src="@{images/website_logo.png}"
              alt="Logo of the website, a painting canvas."
-             style="width: 64px; height: 64px; margin-bottom: -10px;"
-        />Draw your doodle!<img
-            th:src="@{images/website_logo.png}"
-            alt="Logo of the website, a painting canvas."
-            style="width: 64px; height: 64px; margin-bottom: -10px;"
-        />
+             style="width: 64px; height: 64px; margin-bottom: -10px;"/>
+        Doodle Board
     </div>
+    <h1 class="pagetitle">Draw your doodle!</h1>
 
     <!-- Hidden input element which stores the palette list received from the Model in value attribute -->
     <input type="hidden" th:value="${palette}" id="plt"/>
