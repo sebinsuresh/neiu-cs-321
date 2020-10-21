@@ -2,9 +2,11 @@ package dboard.web;
 
 import dboard.DoodlePost;
 import dboard.Palette;
+import dboard.User;
 import dboard.data.DoodlePostRepository;
 import dboard.data.DoodleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -18,12 +20,12 @@ import java.util.Arrays;
 @Controller
 public class DrawController {
 
-    private final DoodlePostRepository dooprepository;
+    private final DoodlePostRepository doodlePostRepository;
     private final DoodleRepository doodleRepository;
 
     @Autowired
     public DrawController(DoodlePostRepository dpr, DoodleRepository dr){
-        this.dooprepository = dpr;
+        this.doodlePostRepository = dpr;
         this.doodleRepository = dr;
     }
 
@@ -33,13 +35,16 @@ public class DrawController {
     }
 
     @PostMapping("/draw")
-    public String submitDraw(@Valid @ModelAttribute("doodlepost") DoodlePost doodlepost, Errors errors){
+    public String submitDraw(@Valid @ModelAttribute("doodlepost") DoodlePost doodlepost,
+                             Errors errors,
+                             @AuthenticationPrincipal User user){
         if(errors.hasErrors()){
             return "/draw";
         }
 
         doodleRepository.save(doodlepost.getContent());
-        dooprepository.save(doodlepost);
+        doodlepost.setUser(user);
+        doodlePostRepository.save(doodlepost);
 
         return "redirect:/submission";
     }

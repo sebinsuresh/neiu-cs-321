@@ -7,6 +7,7 @@ import dboard.data.DoodlePostRepository;
 import dboard.data.DoodleRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,13 +37,14 @@ public class FeedController {
     }
 
     @ModelAttribute
-    public void addDoodles(Model model){
+    public void addDoodles(Model model, @AuthenticationPrincipal User user){
         model.addAttribute("palette", Arrays.asList(Palette.PALETTE));
-        List<DoodlePost> allPosts = doodPostRepo.findAllByOrderByPostedAtDesc();
+        List<DoodlePost> allPosts = doodPostRepo.findAllByUserOrderByPostedAtDesc(user);
         model.addAttribute("posts", allPosts);
 
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String username = ((User)auth.getPrincipal()).getUsername();
+        // Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        // User user = (User)auth.getPrincipal();
+        String username = user.getUsername();
         model.addAttribute("username", username);
         log.info("username passed to model: " + username);
     }

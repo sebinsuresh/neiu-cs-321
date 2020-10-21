@@ -62,6 +62,9 @@ public class DoodlePost {
     @OneToOne
     private Doodle content;
 
+    @ManyToOne
+    private User user;
+
     public DoodlePost(){
         this.content = new Doodle();
     }
