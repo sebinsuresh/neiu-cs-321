@@ -2,9 +2,12 @@ package dboard.web;
 
 import dboard.DoodlePost;
 import dboard.Palette;
+import dboard.User;
 import dboard.data.DoodlePostRepository;
 import dboard.data.DoodleRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,5 +40,10 @@ public class FeedController {
         model.addAttribute("palette", Arrays.asList(Palette.PALETTE));
         List<DoodlePost> allPosts = doodPostRepo.findAllByOrderByPostedAtDesc();
         model.addAttribute("posts", allPosts);
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = ((User)auth.getPrincipal()).getUsername();
+        model.addAttribute("username", username);
+        log.info("username passed to model: " + username);
     }
 }

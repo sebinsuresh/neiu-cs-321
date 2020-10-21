@@ -16,6 +16,8 @@
 </head>
 <body>
     <br/><br/>
+    <h2 class="pagetitle" th:text="${'Hi, ' + username + '!'}">Hello, Placeholder!</h2>
+<!--    <h2 class="pagetitle" th:text="'Hi,' ${username}'!'">Hi, Placeholder!</h2>-->
     <div class="pagetitle">
         <img th:src="@{images/website_logo.png}"
              alt="Logo of the website, a painting canvas."
