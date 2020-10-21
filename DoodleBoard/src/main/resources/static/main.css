@@ -19,6 +19,42 @@ body {
     /*padding: 40px 0px;*/
 }
 
+.centeredP{
+    width: 700px;
+    margin:auto;
+    text-align: center;
+}
+
+form {
+    text-align: center;
+}
+
+form label{
+    min-width: 200px;
+    display: inline-block;
+    text-align: right;
+    padding-right: 20px;
+}
+form input{
+    min-width: 200px;
+    min-height: 25px;
+}
+
+/*form {*/
+/*    display: table;*/
+/*}*/
+/*form p{*/
+/*    display: table-row;*/
+/*}*/
+/*form label {*/
+/*    display: table-cell;*/
+/*    min-width: 200px;*/
+/*    padding-bottom: 10px*/
+/*}*/
+/*form input{*/
+/*    display: table-cell;*/
+/*}*/
+
 .simpleheading{
     text-align: center;
     font-family: 'Open Sans', sans-serif;
@@ -39,12 +75,12 @@ body {
 }
 
 /*#p5CanvasDiv, */ .p5Canvas {
-                       display:block;
-                       margin-left: auto;
-                       margin-right: auto;
-                       border: 1px dashed black;
-                       border-radius: 5px;
-                   }
+   display:block;
+   margin-left: auto;
+   margin-right: auto;
+   border: 1px dashed black;
+   border-radius: 5px;
+}
 
 #dtitle {
     font-family: 'Roboto', sans-serif;

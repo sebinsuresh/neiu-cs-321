@@ -39,9 +39,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/draw","/submission","/feed")
                 .hasRole("USER")
                 .and()
-                .authorizeRequests()
-                .antMatchers("h2-console/**")
-                .permitAll();
+                    .authorizeRequests()
+                    .antMatchers("h2-console/**")
+                    .permitAll()
+                .and()
+                    .formLogin().loginPage("/login").defaultSuccessUrl("/feed")
+                .and()
+                    .logout().logoutSuccessUrl("/home");
 
         http.csrf().disable();
         http.headers().frameOptions().disable();
