@@ -24,6 +24,8 @@
     </div>
     <h1 class="pagetitle">Draw your doodle!</h1>
 
+    <p class="centeredP"><a th:href="@{/feed}">Your Feed</a> | <a th:href="@{/logout}">Logout</a></p>
+
     <!-- Hidden input element which stores the palette list received from the Model in value attribute -->
     <input type="hidden" th:value="${palette}" id="plt"/>
 
