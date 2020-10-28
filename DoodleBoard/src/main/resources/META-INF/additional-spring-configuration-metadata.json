@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "doodlefeed.posts.feeedSize",
+      "type": "java.lang.Integer",
+      "description": "Sets the value that limits the number of posts shown in the feed."
+    }
+  ] }

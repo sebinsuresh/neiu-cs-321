@@ -6,6 +6,10 @@ import dboard.User;
 import dboard.data.DoodlePostRepository;
 import dboard.data.DoodleRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -25,21 +29,30 @@ public class FeedController {
 
     private final DoodlePostRepository doodPostRepo;
     private final DoodleRepository doodRepo;
+    @Autowired
+    private DoodlePostProperty doodlePostProperty;
 
-    public FeedController(DoodlePostRepository doodPostRepo, DoodleRepository doodRepo){
+    public FeedController(DoodlePostRepository doodPostRepo, DoodleRepository doodRepo, DoodlePostProperty doodlePostProperty){
         this.doodPostRepo = doodPostRepo;
         this.doodRepo = doodRepo;
+        this.doodlePostProperty = doodlePostProperty;
+        log.info("FeedSize Value in constructor: " + doodlePostProperty.getFeedSize());
     }
 
     @GetMapping
     public String showFeed(){
+        // The posts being shown are limited to the value in doodlefeed.posts.pageSize,
+        // before adding to the model, in the addDoodles() method
+        log.info("FeedSize Value in GetMapped methood: " + doodlePostProperty.getFeedSize());
         return "feed";
     }
 
     @ModelAttribute
     public void addDoodles(Model model, @AuthenticationPrincipal User user){
+        Pageable pageable = PageRequest.of(0, doodlePostProperty.getFeedSize());
+
         model.addAttribute("palette", Arrays.asList(Palette.PALETTE));
-        List<DoodlePost> allPosts = doodPostRepo.findAllByUserOrderByPostedAtDesc(user);
+        List<DoodlePost> allPosts = doodPostRepo.findAllByUserOrderByPostedAtDesc(user, pageable);
         model.addAttribute("posts", allPosts);
 
         // Authentication auth = SecurityContextHolder.getContext().getAuthentication();

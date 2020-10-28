@@ -1,3 +1,4 @@
+---
 spring:
   jpa:
     hibernate:
@@ -13,7 +14,9 @@ spring:
     password:
     driver-class-name: org.h2.Driver
 
-
+doodlefeed:
+  posts:
+    feedSize: 10
 
 # # From .properties file:
 #spring.jpa.hibernate.ddl-auto=update
