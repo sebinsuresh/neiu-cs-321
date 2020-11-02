@@ -7,6 +7,7 @@
     <title>Doodle Board - Home</title>
 
     <link rel="icon" type="image/png" th:href="@{images/favicon.ico}">
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{main.css}"/>
 
     <!-- Google fonts import for Roboto, Open Sans -->
@@ -19,5 +20,8 @@
 <p class="centeredP"><a th:href="@{/register}">Register an Account</a> | <a th:href="@{/login}">Login</a></p>
 
 <footer>Copyright @2020 | Sebin Puthenthara Suresh | CS 321-1</footer>
+<script th:src="@{webjars/jquery/3.5.1/jquery.min.js}"></script>
+<script th:src="@{webjars/popper.js/1.16.0/umd/popper.min.js}"></script>
+<script th:src="@{webjars/bootstrap/4.5.2/js/bootstrap.min.js}"></script>
 </body>
 </html>
