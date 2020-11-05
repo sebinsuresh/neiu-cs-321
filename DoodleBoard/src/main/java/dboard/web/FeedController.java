@@ -36,14 +36,12 @@ public class FeedController {
         this.doodPostRepo = doodPostRepo;
         this.doodRepo = doodRepo;
         this.doodlePostProperty = doodlePostProperty;
-        log.info("FeedSize Value in constructor: " + doodlePostProperty.getFeedSize());
     }
 
     @GetMapping
     public String showFeed(){
         // The posts being shown are limited to the value in doodlefeed.posts.pageSize,
         // before adding to the model, in the addDoodles() method
-        log.info("FeedSize Value in GetMapped methood: " + doodlePostProperty.getFeedSize());
         return "feed";
     }
 
@@ -59,6 +57,5 @@ public class FeedController {
         // User user = (User)auth.getPrincipal();
         String username = user.getUsername();
         model.addAttribute("username", username);
-        log.info("username passed to model: " + username);
     }
 }
