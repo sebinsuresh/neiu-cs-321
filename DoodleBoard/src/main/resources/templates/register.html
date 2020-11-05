@@ -4,50 +4,125 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Doodle Board - Register</title>
-
     <link rel="icon" type="image/png" th:href="@{images/favicon.ico}">
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}"/>
-    <link rel="stylesheet" type="text/css" th:href="@{main.css}"/>
-
+    <link rel="stylesheet" type="text/css" th:href="@{newmain.css}"/>
     <!-- Google fonts import for Roboto, Open Sans -->
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
-    <!-- P5JS Library (Minified) script -->
-    <script th:src="@{scripts/p5.min.js}"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&family=Roboto:wght@300;400&display=swap"
+          rel="stylesheet">
 </head>
-<body>
-<br/><br/>
-    <div class="pagetitle">
-        <img th:src="@{images/website_logo.png}"
-             alt="Logo of the website, a painting canvas."
-             style="width: 64px; height: 64px; margin-bottom: -10px;"/>
-        Doodle Board
+<body class="bg-light">
+    <div class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand">
+            <img th:src="@{images/website_logo.png}"
+                 width="32"
+                 height="32"
+                 alt="Logo of the website, which is an illustration of a painting canvas."/>
+            Doodle Board
+        </a>
+        <button class="navbar-toggler justify-content-end"
+                type="button"
+                data-toggle="collapse"
+                data-target="#navBarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navBarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link"
+                       th:href="@{/}"
+                       th:classappend="${#request.getServletPath() == '/' ? 'active' : ''}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link"
+                       th:href="@{/login}"
+                       th:classappend="${#request.getServletPath() == '/login' ? 'active' : ''}"
+                       th:if="${#authentication.getName().equals('anonymousUser')}">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link"
+                       th:href="@{/register}"
+                       th:classappend="${#request.getServletPath() == '/register' ? 'active' : ''}"
+                       th:if="${#authentication.getName().equals('anonymousUser')}">Register</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link"
+                       th:href="@{/draw}"
+                       th:classappend="${#request.getServletPath() == '/draw' ? 'active' : ''}"
+                       th:if="${!#authentication.getName().equals('anonymousUser')}">Draw</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link"
+                       th:href="@{/feed}"
+                       th:classappend="${#request.getServletPath() == '/feed' ? 'active' : ''}"
+                       th:if="${!#authentication.getName().equals('anonymousUser')}">Feed</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-danger"
+                       th:href="@{/logout}"
+                       th:if="${!#authentication.getName().equals('anonymousUser')}">Logout</a>
+                </li>
+            </ul>
+        </div>
     </div>
-    <h1 class="pagetitle">Register Your DoodleBoard Account</h1>
-    <p class="centeredP"><a th:href="@{/}">Home</a> | <a th:href="@{/login}">Login</a></p>
-
-    <form method="post" th:action="@{/register}" th:object="${registrationForm}" class="centeredP">
-
-        <span class="centeredP errormsg" th:if="${#fields.hasErrors('username')}"
-              th:errors="*{username}">placeholder error</span><br/>
-        <label for="username">Username: </label>
-        <input type="text" th:field="*{username}" id="username"/>
-        <br th:if="${#fields.hasErrors('email')}"/><br th:if="${#fields.hasErrors('email')}"/>
 
 
-        <span class="centeredP errormsg" th:if="${#fields.hasErrors('email')}"
-              th:errors="*{email}">placeholder error</span><br/>
-        <label for="email">Email: </label>
-        <input type="text" th:field="*{email}" id="email"/>
-        <br th:if="${#fields.hasErrors('password')}"/><br th:if="${#fields.hasErrors('password')}"/>
+    <h1 class="mt-2 text-center p-2">Register Your DoodleBoard Account</h1>
 
-        <span class="centeredP errormsg" th:if="${#fields.hasErrors('password')}"
-              th:errors="*{password}">placeholder error</span><br/>
-        <label for="password">Password: </label>
-        <input type="password" th:field="*{password}" id="password"/><br/><br/>
+    <form method="post"
+          th:action="@{/register}"
+          th:object="${registrationForm}"
+          id="registrationForm"
+          class="justify-content-center container-fluid text-center bg-white col-10 col-lg-5 mt-3 p-2 mb-5">
 
-        <input type="submit" value="Register" />
+
+        <div class="row form-group pt-3 pl-5">
+            <span class="row text-danger col-10 col-lg-7 offset-lg-4 text-left"
+                  th:if="${#fields.hasErrors('username')}"
+                  th:errors="*{username}">placeholder error</span>
+            <label for="username" class="col-form-label text-left col-5 col-lg-3 offset-lg-1 pl-0">Username: </label>
+            <input type="text" th:field="*{username}" id="username"
+                   class="form-control col-10 col-lg-6"/>
+        </div>
+
+        <div class="row form-group pl-5">
+            <span class="row text-danger col-10 col-lg-7 offset-lg-4 text-left"
+                  th:if="${#fields.hasErrors('email')}"
+                  th:errors="*{email}">placeholder error</span>
+            <label for="email"
+                   class="col-form-label text-left col-5 col-lg-3 offset-lg-1 pl-0">Email: </label>
+            <input type="text" th:field="*{email}" id="email"
+                   class="form-control col-10 col-lg-6"/>
+        </div>
+
+        <div class="row form-group pl-5">
+            <span class="row text-danger col-10 col-lg-7 offset-lg-4 text-left"
+                  th:if="${#fields.hasErrors('password')}"
+                  th:errors="*{password}">placeholder error</span>
+            <label for="password"
+                   class="col-form-label text-left col-5 col-lg-3 offset-lg-1 pl-0">Password: </label>
+            <input type="password" th:field="*{password}" id="password"
+                   class="form-control col-10 col-lg-6"/>
+        </div>
+
+        <input type="submit"
+               value="Register"
+               class="btn btn-outline-primary btn-lg mt-2 mb-3 col-6"/>
     </form>
+
+    <!--Empty div for bottom spacing-->
+    <div class="row m-0 mb-5 pb-5"></div>
+
+    <footer class="row bg-dark text-light text-center fixed-bottom pt-1 pb-1 pt-lg-4 pb-lg-4 pl-3 pr-3 pt-2">
+        <span class="col-lg-4 p-0">Copyright @2020 </span>
+        <span class="col-lg-4 p-0">Sebin Puthenthara Suresh </span>
+        <span class="col-lg-4 p-0">CS 321-1 </span>
+    </footer>
 
     <script th:src="@{webjars/jquery/3.5.1/jquery.min.js}"></script>
     <script th:src="@{webjars/popper.js/1.16.0/umd/popper.min.js}"></script>
