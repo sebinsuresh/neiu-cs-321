@@ -91,12 +91,28 @@
 
 
     <div th:fragment="contentLogoHeading" class="justify-content-center text-center mt-3">
-        <img class="img-fluid col-6 col-lg-4 col-xl-2" th:src="@{images/website_logo.png}"
+        <img class="img-fluid col-6 col-lg-4 col-xl-2"
+             th:if="${#request.getServletPath() != '/error'}"
+             th:src="@{images/website_logo.png}"
              alt="Logo of the website, which is an illustration of a painting canvas."/>
+
+        <img class="img-fluid col-6 col-lg-4 col-xl-2"
+             th:if="${#response.getStatus() == 404}"
+             th:src="@{images/website_logo_404.png}"
+             alt="Error page logo of the website, which is an illustration of a canvas holder without the canvas."/>
+
+        <img class="img-fluid col-6 col-lg-4 col-xl-2"
+             th:if="${#response.getStatus() == 500}"
+             th:src="@{images/website_logo_500.png}"
+             alt="Error page logo of the website, which is an illustration of a painting canvas on fire."/>
+
+        <img class="img-fluid col-6 col-lg-4 col-xl-2"
+             th:if="${#request.getServletPath() == '/error' && #response.getStatus() != 500 && #response.getStatus() != 404}"
+             th:src="@{images/website_logo_500.png}"
+             alt="Logo of the website, which is an illustration of a painting canvas."/>
+
         <h1 class="mt-2 text-center">Doodle Board</h1>
     </div>
-
-
 
     <footer th:fragment="footerfixed" class="row bg-dark text-light text-center fixed-bottom pt-1 pb-1 pt-lg-4 pb-lg-4 pl-3 pr-3 pt-2">
         <span class="col-lg-4 p-0">Copyright @2020 </span>

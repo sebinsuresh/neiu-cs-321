@@ -57,9 +57,9 @@ function draw() {
     if(!smallerUI){
         text('◀ ▶ L/R arrow keys to switch colors.', drawStartX, height - 50);
         text('🖱   L/R click to Draw/Erase.', drawStartX, height - 30);
-        text('🔄  Refresh to reset.', drawStartX, height - 10);
+        text('🔄  Refresh page to reset.', drawStartX, height - 10);
     } else {
-        text('🔄  Refresh to reset.', drawStartX, height - 10);
+        text('🔄  Refresh page to reset.', drawStartX, height - 10);
     }
 
     stroke(0);

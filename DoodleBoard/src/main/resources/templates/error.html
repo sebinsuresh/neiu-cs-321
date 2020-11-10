@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Doodle Board - Error!</title>
+    <div th:replace="fragments/base :: headWithoutTitle"></div>
+</head>
+<body class="bg-light">
+    <div th:replace="fragments/base :: topNavBar"></div>
+
+    <div class="container-fluid justify-content-center mb-5 pb-5">
+
+        <div th:replace="fragments/base :: contentLogoHeading"></div>
+
+        <h2 class="text-center mt-5">Sorry! Something went wrong. Please try again.</h2>
+
+        <footer th:replace="fragments/base :: footerfixed"></footer>
+    </div>
+
+    <div th:replace="fragments/base :: scripts"></div>
+</body>
+</html>

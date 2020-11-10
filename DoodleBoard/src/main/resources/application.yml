@@ -18,6 +18,12 @@ doodlefeed:
   posts:
     feedSize: 20
 
+server:
+  error:
+    whitelabel:
+      enabled: false
+    path: /error
+
 # # From .properties file:
 #spring.jpa.hibernate.ddl-auto=update
 #
