@@ -16,7 +16,7 @@ spring:
 
 doodlefeed:
   posts:
-    feedSize: 10
+    feedSize: 20
 
 # # From .properties file:
 #spring.jpa.hibernate.ddl-auto=update

@@ -1,0 +1,9 @@
+2020-11-10 13:58:08 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "DELETE *[*] FROM DOODLE_POST WHERE TITLE=""spooky1"" OR TITLE=""face1"" OR TITLE=""hipster"""; expected "identifier"; SQL statement:
+DELETE * FROM DOODLE_POST WHERE TITLE="spooky1" OR TITLE="face1" OR TITLE="hipster" [42001-200]
+2020-11-10 13:58:41 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "DELETE *[*] FROM DOODLE_POST WHERE TITLE='spooky1' OR TITLE='face1' OR TITLE='hipster'"; expected "identifier"; SQL statement:
+DELETE * FROM DOODLE_POST WHERE TITLE='spooky1' OR TITLE='face1' OR TITLE='hipster' [42001-200]
+2020-11-10 13:58:48 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "DELETE *[*] FROM DOODLE_POST WHERE TITLE='spooky1'"; expected "identifier"; SQL statement:
+DELETE * FROM DOODLE_POST WHERE TITLE='spooky1' [42001-200]

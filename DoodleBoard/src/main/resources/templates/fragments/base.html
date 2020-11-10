@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<!--The th:remove will remove the <head> tags so that this fragment can be inserted within the <head></head> without issues.-->
+<head th:fragment="headWithoutTitle" th:remove="tag">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" type="image/png" th:href="@{images/favicon.ico}">
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{newmain.css}"/>
+    <!-- Google fonts import for Roboto, Open Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&family=Roboto:wght@300;400&display=swap"
+          rel="stylesheet">
+</head>
+
+<head th:fragment="headWithoutTitleP5" th:remove="tag">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" type="image/png" th:href="@{images/favicon.ico}">
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{newmain.css}"/>
+    <!-- Google fonts import for Roboto, Open Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&family=Roboto:wght@300;400&display=swap"
+          rel="stylesheet">
+    <!-- P5JS Library (Minified) script -->
+    <script th:src="@{scripts/p5.min.js}"></script>
+</head>
+
+<body class="bg-light">
+
+
+    <div th:fragment="topNavBar" class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand">
+            <img th:src="@{images/website_logo.png}"
+                 width="32"
+                 height="32"
+                 alt="Logo of the website, which is an illustration of a painting canvas."/>
+            Doodle Board
+        </a>
+        <button class="navbar-toggler justify-content-end"
+                type="button"
+                data-toggle="collapse"
+                data-target="#navBarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navBarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link"
+                       th:href="@{/}"
+                       th:classappend="${#request.getServletPath() == '/' ? 'active' : ''}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link"
+                       th:href="@{/login}"
+                       th:classappend="${#request.getServletPath() == '/login' ? 'active' : ''}"
+                       th:if="${#authentication.getName().equals('anonymousUser')}">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link"
+                       th:href="@{/register}"
+                       th:classappend="${#request.getServletPath() == '/register' ? 'active' : ''}"
+                       th:if="${#authentication.getName().equals('anonymousUser')}">Register</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link"
+                       th:href="@{/draw}"
+                       th:classappend="${#request.getServletPath() == '/draw' ? 'active' : ''}"
+                       th:if="${!#authentication.getName().equals('anonymousUser')}">Draw</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link"
+                       th:href="@{/feed}"
+                       th:classappend="${#request.getServletPath() == '/feed' ? 'active' : ''}"
+                       th:if="${!#authentication.getName().equals('anonymousUser')}">Feed</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-danger"
+                       th:href="@{/logout}"
+                       th:if="${!#authentication.getName().equals('anonymousUser')}">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+
+    <div th:fragment="contentLogoHeading" class="justify-content-center text-center mt-3">
+        <img class="img-fluid col-6 col-lg-4 col-xl-2" th:src="@{images/website_logo.png}"
+             alt="Logo of the website, which is an illustration of a painting canvas."/>
+        <h1 class="mt-2 text-center">Doodle Board</h1>
+    </div>
+
+
+
+    <footer th:fragment="footerfixed" class="row bg-dark text-light text-center fixed-bottom pt-1 pb-1 pt-lg-4 pb-lg-4 pl-3 pr-3 pt-2">
+        <span class="col-lg-4 p-0">Copyright @2020 </span>
+        <span class="col-lg-4 p-0">Sebin Puthenthara Suresh </span>
+        <span class="col-lg-4 p-0">CS 321-1 </span>
+    </footer>
+
+    <footer th:fragment="footernormal" class="container-fluid bg-dark text-light text-center pt-1 pb-1 pt-lg-4 pb-lg-4 pl-3 pr-3 pt-2 mt-5">
+        <div class="row">
+            <span class="col-lg-4 p-0">Copyright @2020 </span>
+            <span class="col-lg-4 p-0">Sebin Puthenthara Suresh </span>
+            <span class="col-lg-4 p-0">CS 321-1 </span>
+        </div>
+    </footer>
+
+
+    <div th:fragment="scripts">
+        <script th:src="@{webjars/jquery/3.5.1/jquery.min.js}"></script>
+        <script th:src="@{webjars/popper.js/1.16.0/umd/popper.min.js}"></script>
+        <script th:src="@{webjars/bootstrap/4.5.2/js/bootstrap.min.js}"></script>
+    </div>
+</body>
+</html>
