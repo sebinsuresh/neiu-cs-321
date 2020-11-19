@@ -1,6 +1,6 @@
 let posts = document.getElementsByClassName("feedpost");
-let palette = document.getElementById("plt").value;
-palette = palette.substring(1, palette.length-1).split(", ");
+let feedpalette = document.getElementById("plt").value;
+feedpalette = feedpalette.substring(1, feedpalette.length-1).split(", ");
 
 document.addEventListener('DOMContentLoaded', initialize, false);
 
@@ -9,6 +9,44 @@ function initialize(){
     $(window).resize(function() {
         loadPosts();
     })
+
+    $('#editouter').click(function(ev){
+        if(ev.target.classList.contains("editouter")){
+            // console.log("clicked outside editable region");
+            hideEditRegion();
+        }
+    })
+    hideEditRegion();
+}
+
+function hideEditRegion(){
+    $('#editouter').css("opacity","0%");
+    $('#editregion').css("margin-top","20%");
+    if(typeof noLoop !== 'undefined')
+        noLoop();   // stop p5js draw() loop
+    setTimeout(()=>{
+        $('#editouter').hide()
+    },~~(1000/3));
+}
+
+function showEditRegion(){
+    $('#editouter').show();
+    $('#editouter').css("opacity","100%");
+    $('#editregion').css("margin-top","0%");
+    setTimeout(()=>{
+        loop()  // restart p5js draw() loop
+    },~~(1000/3));
+}
+
+function setDrawingStr(){
+    let currentId = $("#currEditing").val();
+    let newDrawStrValue = $("#str_"+currentId).val();
+    let oldTitle = $("#title_"+currentId).val();
+    noLoop();
+    $("#drawingStr").val(newDrawStrValue);
+    $("#dtitle").val(oldTitle);
+    initializeDrawingArray();
+    loop();
 }
 
 function loadPosts(){
@@ -22,7 +60,8 @@ function loadPosts(){
 
 function setcnv(post){
     let cnv = post.children[0];
-    cnv.width = ~~(posts[0].clientWidth) - 2*(parseInt($(posts[0]).css('padding-left').substring(-2)));
+    let availWidth = ~~(posts[0].clientWidth) - 2*(parseInt($(posts[0]).css('padding-left').substring(-2)));
+    cnv.width = 64*~~(availWidth/64);
     cnv.height = cnv.width;
     return cnv;
 }
@@ -34,7 +73,7 @@ function drawDoodle(cnv, drawStr){
     for(let i = 0; i < 64; i++){
         for(let j = 0; j < 64; j++){
             let colorIndex = drawStr.charAt(j*64 + i);
-            c.fillStyle=palette[parseInt(colorIndex,16)];
+            c.fillStyle = feedpalette[parseInt(colorIndex,16)];
             c.strokeStyle='rgba(0,0,0,0)';
             if(colorIndex == 'b'){
                 c.fillStyle="#FFF";

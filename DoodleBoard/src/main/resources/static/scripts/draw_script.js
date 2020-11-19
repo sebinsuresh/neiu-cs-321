@@ -29,6 +29,13 @@ function setup() {
     palette = document.getElementById("plt").value;
     palette = palette.substring(1, palette.length-1).split(", ");
 
+    initializeDrawingArray();
+
+    currentCol = 0;
+    noLoop();
+}
+
+function initializeDrawingArray(){
     drawStrElem = document.getElementById("drawingStr");
     let initialDrawing = drawStrElem.value;
 
@@ -42,8 +49,6 @@ function setup() {
             drawing[i].push(palette[parseInt(initialDrawing.charAt(j*64 + i),16)])
         }
     }
-
-    currentCol = 0;
 }
 
 // P5js' draw() function will iterate 60 times per second.

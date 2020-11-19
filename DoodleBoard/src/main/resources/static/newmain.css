@@ -59,3 +59,7 @@ h1,h2,h3 {
 .likeCount:hover {
     color: #9b4146;
 }
+
+#editouter, #editregion {
+    transition: 0.2s ease-in all;
+}

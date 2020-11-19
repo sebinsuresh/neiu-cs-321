@@ -57,5 +57,7 @@ public class FeedController {
         // User user = (User)auth.getPrincipal();
         String username = user.getUsername();
         model.addAttribute("username", username);
+
+        model.addAttribute("doodlepost", new DoodlePost());
     }
 }

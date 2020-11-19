@@ -7,9 +7,9 @@
 <head th:fragment="headWithoutTitle" th:remove="tag">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="icon" type="image/png" th:href="@{images/favicon.ico}">
+    <link rel="icon" type="image/png" th:href="@{/images/favicon.ico}">
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}"/>
-    <link rel="stylesheet" type="text/css" th:href="@{newmain.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/newmain.css}"/>
     <!-- Google fonts import for Roboto, Open Sans -->
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&family=Roboto:wght@300;400&display=swap"
           rel="stylesheet">
@@ -18,22 +18,21 @@
 <head th:fragment="headWithoutTitleP5" th:remove="tag">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="icon" type="image/png" th:href="@{images/favicon.ico}">
+    <link rel="icon" type="image/png" th:href="@{/images/favicon.ico}">
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}"/>
-    <link rel="stylesheet" type="text/css" th:href="@{newmain.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/newmain.css}"/>
     <!-- Google fonts import for Roboto, Open Sans -->
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&family=Roboto:wght@300;400&display=swap"
           rel="stylesheet">
     <!-- P5JS Library (Minified) script -->
-    <script th:src="@{scripts/p5.min.js}"></script>
+    <script th:src="@{/scripts/p5.min.js}"></script>
 </head>
 
 <body class="bg-light">
 
-
     <div th:fragment="topNavBar" class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand">
-            <img th:src="@{images/website_logo.png}"
+            <img th:src="@{/images/website_logo.png}"
                  width="32"
                  height="32"
                  alt="Logo of the website, which is an illustration of a painting canvas."/>
@@ -93,22 +92,22 @@
     <div th:fragment="contentLogoHeading" class="justify-content-center text-center mt-3">
         <img class="img-fluid col-6 col-lg-4 col-xl-2"
              th:if="${#request.getServletPath() != '/error'}"
-             th:src="@{images/website_logo.png}"
+             th:src="@{/images/website_logo.png}"
              alt="Logo of the website, which is an illustration of a painting canvas."/>
 
         <img class="img-fluid col-6 col-lg-4 col-xl-2"
              th:if="${#response.getStatus() == 404}"
-             th:src="@{images/website_logo_404.png}"
+             th:src="@{/images/website_logo_404.png}"
              alt="Error page logo of the website, which is an illustration of a canvas holder without the canvas."/>
 
         <img class="img-fluid col-6 col-lg-4 col-xl-2"
              th:if="${#response.getStatus() == 500}"
-             th:src="@{images/website_logo_500.png}"
+             th:src="@{/images/website_logo_500.png}"
              alt="Error page logo of the website, which is an illustration of a painting canvas on fire."/>
 
         <img class="img-fluid col-6 col-lg-4 col-xl-2"
              th:if="${#request.getServletPath() == '/error' && #response.getStatus() != 500 && #response.getStatus() != 404}"
-             th:src="@{images/website_logo_500.png}"
+             th:src="@{/images/website_logo_500.png}"
              alt="Logo of the website, which is an illustration of a painting canvas."/>
 
         <h1 class="mt-2 text-center">Doodle Board</h1>
@@ -130,9 +129,9 @@
 
 
     <div th:fragment="scripts">
-        <script th:src="@{webjars/jquery/3.5.1/jquery.min.js}"></script>
-        <script th:src="@{webjars/popper.js/1.16.0/umd/popper.min.js}"></script>
-        <script th:src="@{webjars/bootstrap/4.5.2/js/bootstrap.min.js}"></script>
+        <script th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"></script>
+        <script th:src="@{/webjars/popper.js/1.16.0/umd/popper.min.js}"></script>
+        <script th:src="@{/webjars/bootstrap/4.5.2/js/bootstrap.min.js}"></script>
     </div>
 </body>
 </html>
