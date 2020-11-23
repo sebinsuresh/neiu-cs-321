@@ -84,8 +84,6 @@ function draw() {
     }
     drawPalette();
     handleMouse();
-    setDrawingString(); // set the drawingStr element value
-
     // text(~~frameRate(), 20,20);  // DEBUG PERFORMANCE
 }
 
@@ -309,6 +307,7 @@ function keyReleased(){
 
 function mouseReleased(){
     isDrawing = false;
+    setDrawingString(); // set the drawingStr element value
 }
 
 function nextColor(){

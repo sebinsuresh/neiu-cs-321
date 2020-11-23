@@ -22,7 +22,11 @@ function initialize(){
         }
     })
 
-
+    $('#deleteouter').click(function(ev){
+        if(ev.target.classList.contains("deleteouter")){
+            hideDeleteRegion();
+        }
+    })
 }
 
 function hideEditRegion(){
@@ -62,6 +66,20 @@ function showViewRegion(){
     let post = document.getElementById("viewregion");
     let cnv = setcnv(post);
     drawDoodle(cnv, $("#drawingStr").val());
+}
+
+function hideDeleteRegion(){
+    $('#deleteouter').css("opacity","0%");
+    $('#deleteregion').css("margin-top","20%");
+    setTimeout(()=>{
+        $('#deleteouter').hide()
+    },~~(1000/3));
+}
+
+function showDeleteRegion(){
+    $('#deleteouter').show();
+    $('#deleteouter').css("opacity","100%");
+    $('#deleteregion').css("margin-top","0%");
 }
 
 function setDrawingStr(){

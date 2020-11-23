@@ -60,6 +60,6 @@ h1,h2,h3 {
     color: #9b4146;
 }
 
-#editouter, #editregion, #viewouter, #viewregion {
+#editouter, #editregion, #viewouter, #viewregion, #deleteouter, #deleteregion {
     transition: 0.2s ease-in all;
 }
