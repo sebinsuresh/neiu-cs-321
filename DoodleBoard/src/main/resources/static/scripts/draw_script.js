@@ -32,7 +32,6 @@ function setup() {
     initializeDrawingArray();
 
     currentCol = 0;
-    noLoop();
 }
 
 function initializeDrawingArray(){

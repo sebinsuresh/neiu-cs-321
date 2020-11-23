@@ -12,18 +12,26 @@ function initialize(){
 
     $('#editouter').click(function(ev){
         if(ev.target.classList.contains("editouter")){
-            // console.log("clicked outside editable region");
             hideEditRegion();
         }
     })
-    hideEditRegion();
+
+    $('#viewouter').click(function(ev){
+        if(ev.target.classList.contains("viewouter")){
+            hideViewRegion();
+        }
+    })
+
+
 }
 
 function hideEditRegion(){
     $('#editouter').css("opacity","0%");
     $('#editregion').css("margin-top","20%");
-    if(typeof noLoop !== 'undefined')
+    if(typeof noLoop !== 'undefined'){
         noLoop();   // stop p5js draw() loop
+    }
+
     setTimeout(()=>{
         $('#editouter').hide()
     },~~(1000/3));
@@ -34,14 +42,28 @@ function showEditRegion(){
     $('#editouter').css("opacity","100%");
     $('#editregion').css("margin-top","0%");
     setTimeout(()=>{
-        loop()  // restart p5js draw() loop
+        loop();  // restart p5js draw() loop
     },~~(1000/3));
+}
+
+function hideViewRegion(){
+    $('#viewouter').css("opacity","0%");
+    $('#viewregion').css("margin-top","20%");
+    setTimeout(()=>{
+        $('#viewouter').hide()
+    },~~(1000/3));
+}
+
+function showViewRegion(){
+    $('#viewouter').show();
+    $('#viewouter').css("opacity","100%");
+    $('#viewregion').css("margin-top","0%");
 }
 
 function setDrawingStr(){
     let currentId = $("#currEditing").val();
     let newDrawStrValue = $("#str_"+currentId).val();
-    let oldTitle = $("#title_"+currentId).val();
+    let oldTitle = $("#title_"+currentId).text();
     noLoop();
     $("#drawingStr").val(newDrawStrValue);
     $("#dtitle").val(oldTitle);

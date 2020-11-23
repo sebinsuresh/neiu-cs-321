@@ -30,7 +30,6 @@ public class Doodle {
     @Pattern(regexp="^(?!b{4096}$)([a-f0-9 ]+)$", message = "The doodle can't be empty (draw something)")   // accepts everythng except 'b' 4096 times (original empty string)
     @Size(min = 4096, max = 4096, message = "The doodle has to be 64x64")
     private String data;                // String representing the pixel by pixel value of the doodle.
-    // private final int[][] data;      // int array representing the pixel by pixel value of the doodle.
 
     // Constructor
     public Doodle(){

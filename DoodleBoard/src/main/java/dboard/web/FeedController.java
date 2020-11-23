@@ -15,6 +15,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -58,6 +59,10 @@ public class FeedController {
         String username = user.getUsername();
         model.addAttribute("username", username);
 
-        model.addAttribute("doodlepost", new DoodlePost());
+        // This check is required as EditController might have already added a DoodlePost object,
+        // if there was an error in the post.
+        if(!model.containsAttribute("hasError")) {
+            model.addAttribute("doodlepost", new DoodlePost());
+        }
     }
 }
