@@ -58,15 +58,25 @@ function showViewRegion(){
     $('#viewouter').show();
     $('#viewouter').css("opacity","100%");
     $('#viewregion').css("margin-top","0%");
+    setDrawingStr();
+    let post = document.getElementById("viewregion");
+    let cnv = setcnv(post);
+    drawDoodle(cnv, $("#drawingStr").val());
 }
 
 function setDrawingStr(){
     let currentId = $("#currEditing").val();
     let newDrawStrValue = $("#str_"+currentId).val();
     let oldTitle = $("#title_"+currentId).text();
+    $("#dtitle").val(oldTitle);
     noLoop();
     $("#drawingStr").val(newDrawStrValue);
-    $("#dtitle").val(oldTitle);
+}
+
+function setP5DrawingArray(){
+    setDrawingStr();
+    // let newDrawStrValue = $("#drawingStr").val();
+    noLoop();
     initializeDrawingArray();
     loop();
 }
@@ -81,7 +91,8 @@ function loadPosts(){
 }
 
 function setcnv(post){
-    let cnv = post.children[0];
+    // let cnv = post.children[0];
+    let cnv = $(post).children("canvas")[0];
     let availWidth = ~~(posts[0].clientWidth) - 2*(parseInt($(posts[0]).css('padding-left').substring(-2)));
     cnv.width = 64*~~(availWidth/64);
     cnv.height = cnv.width;
