@@ -48,17 +48,15 @@
         <!-- Hidden input element which will store the drawing String in its value attribute -->
         <input type="hidden" th:field="*{content.data}" id="drawingStr" />
 
-
         <span class="row text-danger col-12 text-center justify-content-center mt-3 mb-0"
               th:if="${#fields.hasErrors('title')}"
               th:errors="*{title}">Title Error</span>
-        <!-- Text input to store title of the doodle -->
+        <!-- Text input for title of the doodle -->
         <input class="form-control row col-10 offset-1 text-center justify-content-center mt-3"
                type="text"
                size="40"
                placeholder="Enter Title"
                th:field="*{title}" id="dtitle"/>
-
 
         <button class="btn btn-outline-primary mt-3 mb-4"
                 id="submitBtn">Post Your Doodle</button>

@@ -8,5 +8,5 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix="doodlefeed.posts")
 @Data
 public class DoodlePostProperty {
-    private int feedSize = 5;   //Default value of 5 - will be updated based on configuration file
+    private int feedSize = 5;   // Value will be overriden in configuration
 }

@@ -20,7 +20,7 @@
     <!--Div for each post in the feed-->
     <div class="feedpost bg-white p-4 p-lg-5 mt-5 mb-5 col-10 offset-1 col-md-8 offset-md-2 col-lg-4 offset-lg-4"
          th:each="post: ${posts}">
-        <!--Adding a regular canvas to each post-->
+
         <canvas class="doodleCanvas p-0 col-12" style=""></canvas>
         <input type="hidden" class="drawingStr" th:id="'str_' + ${post.getPostId()}" th:value="${post.content.data}"/>
         <div class="container-fluid p-1 row ml-0 mt-2">
@@ -94,7 +94,6 @@
                        size="40"
                        placeholder="Enter Title"
                        th:field="*{title}" id="dtitle"/>
-
 
                 <button class="btn btn-outline-primary mt-3 mb-4"
                         id="submitBtn">Update Doodle</button>

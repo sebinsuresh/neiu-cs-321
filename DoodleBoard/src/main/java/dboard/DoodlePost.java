@@ -7,23 +7,12 @@
 * ===================================================
 * The creations, called doodles, are made up of 12 possible colors, as shown by the RGB hex code in PALETTE array.
 * (The palette can be found at /src/main/resources/static/images/palette.png)
-* The final color (#000000) in the array represents transparent pixels, as there is capability to produce
-* transparency-enabled PNG files.
+* The final color (#000000) in the array represents transparent pixels - However, right now they are shown as white
+* color pixels instead.
 * The doodles are also tiny, with dimensions of 64x64 pixels.
 * The doodles will be constructed by passing in a String of hex values representing the index of the color.
-* Values greater than 0xB (hex B = decimal 11) will be made to be 0xB (color #000000/transparent).
 * Thus, each 'data' String will have a length of 4096.
 *
-*
-* Parameters:
-* ===========
-* Each user-generated doodle on the website has a unique integer ID, a String title given to the doodle by the user,
-* the unique int ID of the user who created it, an int numLikes keeping track of the number of likes on the doodle,
-* and the data String itself for the doodle image content.
-*
-* Notes:
-* ======
-* Alternate implementation of the data could be done using a BigInteger or int[][] arrays.
 *
 * Example of data String:
 * ================
@@ -49,12 +38,12 @@ import java.time.LocalDateTime;
 @Entity
 public class DoodlePost {
 
-    @Id()
+    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     public long postId;
     @NotEmpty(message = "The title cannot be empty")
-    private String title;         // Title given to the doodle by the user.
-    private LocalDateTime postedAt;
+    private String title;               // Title given to the doodle by the user.
+    private LocalDateTime postedAt;     // Time at which the Doodle Post was made
     @Setter(AccessLevel.NONE)           // No setters for this variable, use the incrLikes() and decrLikes() instead.
     private int numLikes = 0;           // Number of likes on the doodle.
 

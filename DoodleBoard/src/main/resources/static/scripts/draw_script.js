@@ -1,6 +1,6 @@
-let palette;    // array
+let palette;
 let drawing;    // 2d array of strings of hex colors
-let currCol;
+let currentCol = 0;
 let isDrawing = false;
 let drawStrElem;
 let swatchSize = 50;
@@ -30,8 +30,6 @@ function setup() {
     palette = palette.substring(1, palette.length-1).split(", ");
 
     initializeDrawingArray();
-
-    currentCol = 0;
 }
 
 function initializeDrawingArray(){
@@ -84,6 +82,7 @@ function draw() {
     }
     drawPalette();
     handleMouse();
+
     // text(~~frameRate(), 20,20);  // DEBUG PERFORMANCE
 }
 
@@ -111,7 +110,7 @@ function calcUI(parentDiv){
         drwRegionW = cnv.size().width - 2*drawStartX;   // subtracting the small boundaries
         // drawing region is drwRegionW tall and wide
 
-        pxSize = ~~(drwRegionW/64); // ~~ will truncate float to an int
+        pxSize = ~~(drwRegionW/64); // "~~" will truncate decimals and turn float to an integer
         drwRegionW = 64*pxSize;     // Avoid leftover width
 
     }
@@ -225,7 +224,7 @@ function handleMouse(){
         let currentG = parseInt(palette[currentCol].substring(3,5),16);
         let currentB = parseInt(palette[currentCol].substring(5,7),16);
 
-        // Preview of what the cell is gonna look like
+        // preview of what the cell is gonna look like
         fill("rgba("+ currentR + "," + currentG + "," + currentB + ", 0.7)");
         square(mouseCell.x, mouseCell.y, pxSize);
 
@@ -234,7 +233,6 @@ function handleMouse(){
             let x = ~~((mouseCell.x-drawStartX)/pxSize);
             let y = ~~((mouseCell.y-drawStartY)/pxSize);
 
-            // console.log(x + ", " + y);
             if (mouseButton == LEFT || touches.length > 0) {
                 if(pMouseCell){
                     drawLine(pMouseCell.x, pMouseCell.y, mouseCell.x, mouseCell.y);
@@ -272,12 +270,12 @@ function drawLine(x1, y1, x2, y2, w=pxSize) {
         ySep *= -1
 
     noStroke();
-    // fill('white');
+
     if(nDivs > 0){
         for (let i = 0; i <= nDivs; i++) {
             let nx = x1 + (w / 2) + i * xSep,
                 ny = y1 + (w / 2) + i * ySep;
-            // circle(nx, ny, 10);
+
             let foundCell = findCell(nx, ny, w);
             if(foundCell[0]<64 && foundCell[1]<64)
                 drawing[foundCell[0]][foundCell[1]] = palette[currentCol];
@@ -294,11 +292,8 @@ function findCell(px, py, w) {
 }
 
 // Handle shortcuts by keyboard key presses
-// Keycodes found using: http://keycode.info/
 function keyReleased(){
-    if(keyCode == 82){ // 'R'
-        //clearCanvas();
-    } else if(keyCode == RIGHT_ARROW){
+    if(keyCode == RIGHT_ARROW){
         nextColor();
     } else if(keyCode == LEFT_ARROW) {
         prevColor();
@@ -328,7 +323,6 @@ function setDrawingString(){
         for(let j = 0; j < drawing.length; j++){
             drawStr += palette.indexOf(drawing[j][i]).toString(16);
         }
-        // drawStr += "\n";
     }
     drawStrElem.value = drawStr;
 }

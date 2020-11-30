@@ -1,176 +1,38 @@
+.navbar {
+    -webkit-box-shadow: 0px 2px 7px 0px rgba(138,138,138,0.47);
+    -moz-box-shadow: 0px 2px 7px 0px rgba(138,138,138,0.47);
+    box-shadow: 0px 2px 7px 0px rgba(138,138,138,0.47);
+}
+
+/* Prevent bounce effect on ios*/
+html {
+    overflow-x: hidden;
+    height: 100%;
+    /*position: fixed;*/
+}
+
 body {
-    margin: 0;
-    background: #eee;
-    color: #222;
+    overflow-x: auto;
+    height: 100%;
+    /*position: relative;*/
+}
+/* Prevent bounce effect on ios*/
+
+body {
     font-family: 'Roboto', sans-serif;
-    letter-spacing: 2px;
-    font-size: 150%;
-    font-weight: 300;
-    padding: 0px 50px 180px;
 }
-.pagetitle{
-    text-align: center;
+
+h1,h2,h3 {
     font-family: 'Open Sans', sans-serif;
-    font-size: 250%;
-    font-weight: 400;
-    letter-spacing: 6px;
-    word-spacing: 10px;
-    text-transform: uppercase;
-    /*padding: 40px 0px;*/
 }
 
-h2.pagetitle{
-    font-size: 150%;
-}
-
-.centeredP{
-    width: 700px;
-    margin:auto;
-    text-align: center;
-}
-
-form {
-    text-align: center;
-}
-
-form label{
-    min-width: 200px;
-    display: inline-block;
-    text-align: right;
-    padding-right: 20px;
-}
-form input{
-    min-width: 200px;
-    min-height: 25px;
-}
-
-/*form {*/
-/*    display: table;*/
-/*}*/
-/*form p{*/
-/*    display: table-row;*/
-/*}*/
-/*form label {*/
-/*    display: table-cell;*/
-/*    min-width: 200px;*/
-/*    padding-bottom: 10px*/
-/*}*/
-/*form input{*/
-/*    display: table-cell;*/
-/*}*/
-
-.simpleheading{
-    text-align: center;
-    font-family: 'Open Sans', sans-serif;
-    font-size: 150%;
-    font-weight: 400;
-    letter-spacing: 2px;
-    word-spacing: 5px;
-    text-transform: uppercase;
-    padding: 40px 0px;
-}
-
-.logoimg {
-    width: 320px;
-    height: 320px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-/*#p5CanvasDiv, */ .p5Canvas {
-   display:block;
-   margin-left: auto;
-   margin-right: auto;
-   border: 1px dashed black;
-   border-radius: 5px;
-}
-
-#dtitle {
-    font-family: 'Roboto', sans-serif;
-    font-size: 100%;
-    font-weight: 300;
-    text-align:center;
-    display:block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 30px;
-    padding: 20px 20px;
-    border-radius: 5px;
-    border-color: #000;
-    transition: border-color 0.3s ease;
-}
-
-#dtitle:hover{
-    border-color: #96d2f0;
-}
-
-#submitBtn {
-    display:block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 20px;
-    width: 200px;
-    height: 40px;
-    background: #ddd;
+.homechoices, #loginForm, #registrationForm {
+    border: 1px solid gray;
     border-radius: 4px;
-    transition: all 0.3s ease;
-}
-
-#submitBtn:hover{
-    /*margin-top: 16px;*/
-    background: #eee;
-    cursor: pointer;
-}
-
-#drawingForm {
-    display:block;
-    width: 700px;
-    margin-left:auto;
-    margin-right:auto;
-    padding-top: 15px;
-}
-
-.errormsg {
-    color: #9b4146;
-    font-family: 'Roboto', sans-serif;
-    padding-bottom: 10px;
-}
-
-.palettes {
-    display: block;
-    width: 700px;
-    margin-left: auto;
-    margin-right: auto;
-    padding-bottom: 30px;
-}
-
-.paletteInfo {
-    display: inline-block;
-    width: 165px;
-    font-size: 90%;
-}
-
-.swatch {
-    display: inline-block;
-    width: 50px;
-    height: 50px;
-}
-
-.swatchname {
-    display: inline;
 }
 
 .feedpost {
-    display: block;
-    width: 640px;
-    margin-left: auto;
-    margin-right: auto;
     border: 1px solid #222222;
-    background: #fff;
-    padding: 30px;
-    padding-top: 45px;
-    margin-bottom: 40px;
     border-radius: 10px;
 
     /*https://www.cssmatic.com/box-shadow*/
@@ -180,8 +42,6 @@ form input{
 }
 
 .doodleCanvas{
-    width: 640px;
-    height: 640px;
     background-color: white;
     border: 1px solid #ccc;
 
@@ -200,17 +60,6 @@ form input{
     color: #9b4146;
 }
 
-footer {
-    position: fixed;
-    bottom: 0px;
-    width: calc(100% - 70px);
-
-    background: #222;
-    text-align: center;
-    color: #eee;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-
-    margin-left: -58px;
-    padding: 20px 40px 60px 40px;
+#editouter, #editregion, #viewouter, #viewregion, #deleteouter, #deleteregion {
+    transition: 0.2s ease-in all;
 }
