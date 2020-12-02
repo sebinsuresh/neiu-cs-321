@@ -22,13 +22,13 @@ import java.util.Arrays;
 @Slf4j
 @Controller
 @RequestMapping("/edit")
-public class EditDeleteController {
+public class EditControlller {
 
     DoodleRepository doodleRepo;
     DoodlePostRepository doodlePostRepo;
 
     @Autowired
-    public EditDeleteController(DoodleRepository doodleRepo, DoodlePostRepository doodlePostRepo){
+    public EditControlller(DoodleRepository doodleRepo, DoodlePostRepository doodlePostRepo){
         this.doodleRepo = doodleRepo;
         this.doodlePostRepo = doodlePostRepo;
     }
@@ -38,14 +38,15 @@ public class EditDeleteController {
                                  Model model,
                                  RedirectAttributes redirectAttrs,
                                  @ModelAttribute(name = "doodlepost") @Valid DoodlePost editedPost,
-                                 Errors errors){
+                                 Errors errors,
+                                 @ModelAttribute(name="pagenum") Integer pagenum){
         if(errors.hasErrors()){
             redirectAttrs.addFlashAttribute("palette", Arrays.asList(Palette.PALETTE));
             redirectAttrs.addFlashAttribute("hasError", true);
             redirectAttrs.addFlashAttribute("errors", errors);
             editedPost.setPostId(postId);
             redirectAttrs.addFlashAttribute("doodlepost", editedPost);
-            return "redirect:/myposts";
+            return "redirect:/myposts/page/" + (pagenum+1);
         }
 
         DoodlePost newPost = doodlePostRepo.findById(postId).get();
@@ -55,6 +56,6 @@ public class EditDeleteController {
         doodlePostRepo.save(newPost);
         doodleRepo.save(newDoodle);
 
-        return "redirect:/myposts";
+        return "redirect:/myposts/page/" + (pagenum+1);
     }
 }

@@ -29,7 +29,7 @@ public class DeleteController {
         DoodlePost tempDP = doodlePostRepo.findById(postid).get();
         doodlePostRepo.delete(tempDP);
         doodleRepo.delete(tempDP.getContent());
-        return "redirect:/feed";
+        return "redirect:/myposts";
     }
 
 }

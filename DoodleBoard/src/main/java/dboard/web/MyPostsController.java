@@ -6,15 +6,19 @@ import dboard.User;
 import dboard.data.DoodlePostRepository;
 import dboard.data.DoodleRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.validator.internal.engine.valuecontext.ValueContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Arrays;
 import java.util.List;
@@ -35,14 +39,40 @@ public class MyPostsController {
         this.doodlePostProperty = doodlePostProperty;
     }
 
-    @GetMapping
+    @GetMapping(value= {"", "/", "/page/1"})
     public String showMyPosts(Model model, @AuthenticationPrincipal User user){
+        addPostsToModel(model, user, 0);
         return "myposts";
     }
 
-    @ModelAttribute
-    public void addDoodles(Model model, @AuthenticationPrincipal User user){
-        Pageable pageable = PageRequest.of(0, doodlePostProperty.getFeedSize());
+    @GetMapping(value={"/page/{pageNum}"})
+    public String showMyPosts(Model model, @AuthenticationPrincipal User user, @PathVariable Integer pageNum){
+        int numPostsByUser = doodPostRepo.countByUser(user).intValue();
+        int feedSize = doodlePostProperty.getFeedSize();
+
+        pageNum = pageNum-1;
+
+        if(pageNum * feedSize >= numPostsByUser || pageNum < 1){
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "Page number out of bounds"
+            );
+        } else {
+            addPostsToModel(model, user, pageNum);
+        }
+
+        return "myposts";
+    }
+
+    public void addPostsToModel(Model model, User user, int pageNum){
+
+        int numPostsByUser = doodPostRepo.countByUser(user).intValue();
+        int feedSize = doodlePostProperty.getFeedSize();
+
+        int numPages = (int) Math.ceil((double)numPostsByUser/feedSize);
+        model.addAttribute("numpages", numPages);
+        model.addAttribute("currpagenum", pageNum);
+
+        Pageable pageable = PageRequest.of(pageNum, doodlePostProperty.getFeedSize());
 
         model.addAttribute("palette", Arrays.asList(Palette.PALETTE));
         List<DoodlePost> allPosts = doodPostRepo.findAllByUserOrderByPostedAtDesc(user, pageable);

@@ -95,6 +95,8 @@
                        placeholder="Enter Title"
                        th:field="*{title}" id="dtitle"/>
 
+                <input type="hidden" name="pagenum" th:value="${currpagenum}"/>
+
                 <button class="btn btn-outline-primary mt-3 mb-4"
                         id="submitBtn">Update Doodle</button>
                 <a class="btn btn-outline-danger mt-3 mb-4 ml-2" href="#" onclick="hideEditRegion();">Cancel</a>
@@ -198,6 +200,36 @@
             </div>
         </div>
     </div>
+
+    <!--Pagination-->
+    <nav aria-label="My posts pages">
+        <ul class="pagination justify-content-center">
+            <li class="page-item" th:classappend="${currpagenum==0 ? 'disabled' : '' }">
+                <a class="page-link"
+                   th:href="@{/myposts/page/{prevnum}(prevnum=${currpagenum==0 ? 1 : (currpagenum)})}"
+                   aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only">Previous</span>
+                </a>
+            </li>
+
+            <th:block th:each="i: ${#numbers.sequence(1,numpages)}">
+                <li class="page-item"
+                    th:classappend="${currpagenum==i-1?'active':''}">
+                    <a class="page-link" th:href="@{/myposts/page/{i}(i=${i})}" th:text="${i}">1</a>
+                </li>
+            </th:block>
+
+            <li class="page-item" th:classappend="${(currpagenum==(numpages-1)) ? 'disabled' : 'thing' }">
+                <a class="page-link"
+                   th:href="@{/myposts/page/{nextnum}(nextnum=${currpagenum==(numpages-1) ? numpages : (currpagenum+2)})}"
+                   aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
 
     <footer th:replace="fragments/base :: footernormal"></footer>
 

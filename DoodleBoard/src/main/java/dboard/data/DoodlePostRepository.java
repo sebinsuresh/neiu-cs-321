@@ -11,4 +11,5 @@ public interface DoodlePostRepository extends CrudRepository<DoodlePost, Long> {
 
     List<DoodlePost> findAllByUserOrderByPostedAtDesc(User user, Pageable pageable);
 
+    Long countByUser(User user);
 }
