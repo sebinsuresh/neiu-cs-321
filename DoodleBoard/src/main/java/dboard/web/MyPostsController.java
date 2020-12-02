@@ -20,24 +20,24 @@ import java.util.Arrays;
 import java.util.List;
 
 @Controller
-@RequestMapping("/feed")
+@RequestMapping("/myposts")
 @Slf4j
-public class FeedController {
+public class MyPostsController {
 
     private final DoodlePostRepository doodPostRepo;
     private final DoodleRepository doodRepo;
     @Autowired
     private DoodlePostProperty doodlePostProperty;
 
-    public FeedController(DoodlePostRepository doodPostRepo, DoodleRepository doodRepo, DoodlePostProperty doodlePostProperty){
+    public MyPostsController(DoodlePostRepository doodPostRepo, DoodleRepository doodRepo, DoodlePostProperty doodlePostProperty){
         this.doodPostRepo = doodPostRepo;
         this.doodRepo = doodRepo;
         this.doodlePostProperty = doodlePostProperty;
     }
 
     @GetMapping
-    public String showFeed(){
-        return "feed";
+    public String showMyPosts(Model model, @AuthenticationPrincipal User user){
+        return "myposts";
     }
 
     @ModelAttribute

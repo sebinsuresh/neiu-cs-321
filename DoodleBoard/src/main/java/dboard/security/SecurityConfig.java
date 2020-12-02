@@ -36,14 +36,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/draw","/submission","/feed", "/edit/**")
+                .antMatchers("/draw","/submission","/myposts/**", "/edit/**")
                 .hasRole("USER")
                 .and()
                     .authorizeRequests()
                     .antMatchers("h2-console/**")
                     .permitAll()
                 .and()
-                    .formLogin().loginPage("/login").defaultSuccessUrl("/feed")
+                    .formLogin().loginPage("/login").defaultSuccessUrl("/myposts")
                 .and()
                     .logout().logoutSuccessUrl("/");
 

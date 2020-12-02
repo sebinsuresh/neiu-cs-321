@@ -45,7 +45,7 @@ public class EditDeleteController {
             redirectAttrs.addFlashAttribute("errors", errors);
             editedPost.setPostId(postId);
             redirectAttrs.addFlashAttribute("doodlepost", editedPost);
-            return "redirect:/feed";
+            return "redirect:/myposts";
         }
 
         DoodlePost newPost = doodlePostRepo.findById(postId).get();
@@ -55,6 +55,6 @@ public class EditDeleteController {
         doodlePostRepo.save(newPost);
         doodleRepo.save(newDoodle);
 
-        return "redirect:/feed";
+        return "redirect:/myposts";
     }
 }

@@ -3,7 +3,7 @@
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Doodle Board - Feed</title>
+    <title>Doodle Board - My Posts</title>
     <div th:replace="fragments/base :: headWithoutTitleP5"></div>
 </head>
 <body class="bg-light">
@@ -17,8 +17,8 @@
 
     <input type="hidden" id="currEditing" value=""/>
 
-    <!--Div for each post in the feed-->
-    <div class="feedpost bg-white p-4 p-lg-5 mt-5 mb-5 col-10 offset-1 col-md-8 offset-md-2 col-lg-4 offset-lg-4"
+    <!--Div for each post in the My Posts page-->
+    <div class="post bg-white p-4 p-lg-5 mt-5 mb-5 col-10 offset-1 col-md-8 offset-md-2 col-lg-4 offset-lg-4"
          th:each="post: ${posts}">
 
         <canvas class="doodleCanvas p-0 col-12" style=""></canvas>
@@ -204,8 +204,8 @@
     <div th:replace="fragments/base :: scripts"></div>
     <!-- p5js running script -->
     <script th:src="@{/scripts/draw_script.js}"></script>
-    <!-- feed elements sizing & placing script -->
-    <script th:src="@{/scripts/feed_script.js}"></script>
+    <!-- My posts elements sizing & placing script -->
+    <script th:src="@{/scripts/myposts_script.js}"></script>
 
     <script th:if="${hasError}">
         showEditRegion();

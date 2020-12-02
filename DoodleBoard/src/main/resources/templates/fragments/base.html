@@ -74,9 +74,9 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link"
-                       th:href="@{/feed}"
-                       th:classappend="${#request.getServletPath() == '/feed' ? 'active' : ''}"
-                       th:if="${!#authentication.getName().equals('anonymousUser')}">Feed</a>
+                       th:href="@{/myposts}"
+                       th:classappend="${#request.getServletPath() == '/myposts' ? 'active' : ''}"
+                       th:if="${!#authentication.getName().equals('anonymousUser')}">My Posts</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-danger"

@@ -1,6 +1,6 @@
-let posts = document.getElementsByClassName("feedpost");
-let feedpalette = document.getElementById("plt").value;
-feedpalette = feedpalette.substring(1, feedpalette.length-1).split(", ");
+let posts = document.getElementsByClassName("post");
+let myposts_palette = document.getElementById("plt").value;
+myposts_palette = myposts_palette.substring(1, myposts_palette.length-1).split(", ");
 
 document.addEventListener('DOMContentLoaded', initialize, false);
 
@@ -124,7 +124,7 @@ function drawDoodle(cnv, drawStr){
     for(let i = 0; i < 64; i++){
         for(let j = 0; j < 64; j++){
             let colorIndex = drawStr.charAt(j*64 + i);
-            c.fillStyle = feedpalette[parseInt(colorIndex,16)];
+            c.fillStyle = myposts_palette[parseInt(colorIndex,16)];
             c.strokeStyle='rgba(0,0,0,0)';
             if(colorIndex == 'b'){
                 c.fillStyle="#FFF";
