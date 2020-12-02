@@ -75,8 +75,14 @@
                 <li class="nav-item">
                     <a class="nav-link"
                        th:href="@{/myposts}"
-                       th:classappend="${#request.getServletPath() == '/myposts' ? 'active' : ''}"
+                       th:classappend="${#request.getServletPath().indexOf('/myposts') == 0 ? 'active' : ''}"
                        th:if="${!#authentication.getName().equals('anonymousUser')}">My Posts</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link"
+                       th:href="@{/feed}"
+                       th:classappend="${#request.getServletPath().indexOf('/feed') == 0  ? 'active' : ''}"
+                       th:if="${!#authentication.getName().equals('anonymousUser')}">Feed</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-danger"
@@ -126,6 +132,38 @@
             <span class="col-lg-4 p-0">CS 321-1 </span>
         </div>
     </footer>
+
+    <!--Pagination-->
+    <div th:fragment="pagination (basepage)">
+        <nav aria-label="Pages of Doodle Posts" th:if="${numpages > 0}">
+            <ul class="pagination justify-content-center">
+                <li class="page-item" th:classappend="${currpagenum==0 ? 'disabled' : '' }">
+                    <a class="page-link"
+                       th:href="@{/{basepage}/page/{prevnum}(basepage=${basepage}, prevnum=${currpagenum==0 ? 1 : (currpagenum)})}"
+                       aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                </li>
+
+                <th:block th:each="i: ${#numbers.sequence(1,numpages)}">
+                    <li class="page-item"
+                        th:classappend="${currpagenum==i-1?'active':''}">
+                        <a class="page-link" th:href="@{/{basepage}/page/{i}(basepage=${basepage}, i=${i})}" th:text="${i}">1</a>
+                    </li>
+                </th:block>
+
+                <li class="page-item" th:classappend="${(currpagenum==(numpages-1)) ? 'disabled' : 'thing' }">
+                    <a class="page-link"
+                       th:href="@{/{basepage}/page/{nextnum}(basepage=${basepage}, nextnum=${currpagenum==(numpages-1) ? numpages : (currpagenum+2)})}"
+                       aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
 
 
     <div th:fragment="scripts">

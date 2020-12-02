@@ -30,16 +30,16 @@ public class MyPostsController {
 
     private final DoodlePostRepository doodPostRepo;
     private final DoodleRepository doodRepo;
-    @Autowired
     private DoodlePostProperty doodlePostProperty;
 
+    @Autowired
     public MyPostsController(DoodlePostRepository doodPostRepo, DoodleRepository doodRepo, DoodlePostProperty doodlePostProperty){
         this.doodPostRepo = doodPostRepo;
         this.doodRepo = doodRepo;
         this.doodlePostProperty = doodlePostProperty;
     }
 
-    @GetMapping(value= {"", "/", "/page/1"})
+    @GetMapping(value= {"", "/"})
     public String showMyPosts(Model model, @AuthenticationPrincipal User user){
         addPostsToModel(model, user, 0);
         return "myposts";
@@ -52,7 +52,7 @@ public class MyPostsController {
 
         pageNum = pageNum-1;
 
-        if(pageNum * feedSize >= numPostsByUser || pageNum < 1){
+        if(pageNum * feedSize >= numPostsByUser || pageNum < 0){
             throw new ResponseStatusException(
                     HttpStatus.NOT_FOUND, "Page number out of bounds"
             );
@@ -72,7 +72,7 @@ public class MyPostsController {
         model.addAttribute("numpages", numPages);
         model.addAttribute("currpagenum", pageNum);
 
-        Pageable pageable = PageRequest.of(pageNum, doodlePostProperty.getFeedSize());
+        Pageable pageable = PageRequest.of(pageNum, feedSize);
 
         model.addAttribute("palette", Arrays.asList(Palette.PALETTE));
         List<DoodlePost> allPosts = doodPostRepo.findAllByUserOrderByPostedAtDesc(user, pageable);
