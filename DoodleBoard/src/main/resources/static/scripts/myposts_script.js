@@ -6,9 +6,13 @@ document.addEventListener('DOMContentLoaded', initialize, false);
 
 function initialize(){
     loadPosts();
+    // From https://stackoverflow.com/a/27923937
     $(window).resize(function() {
-        loadPosts();
-    })
+        clearTimeout(window.resizedFinished);
+        window.resizedFinished = setTimeout(function(){
+            loadPosts();
+        }, 300);
+    });
 
     $('#editouter').click(function(ev){
         if(ev.target.classList.contains("editouter")){

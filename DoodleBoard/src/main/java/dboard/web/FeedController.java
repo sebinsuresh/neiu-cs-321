@@ -69,10 +69,10 @@ public class FeedController {
         model.addAttribute("numpages", numPages);
         model.addAttribute("currpagenum", pageNum);
 
-        Pageable pageable = PageRequest.of(pageNum, feedSize);
-
         model.addAttribute("palette", Arrays.asList(Palette.PALETTE));
-        List<DoodlePost> allPosts = doodlePostRepo.findAll(pageable);
+
+        Pageable pageable = PageRequest.of(pageNum, feedSize);
+        List<DoodlePost> allPosts = doodlePostRepo.findAllByOrderByPostedAtDesc(pageable);
         model.addAttribute("posts", allPosts);
     }
 
