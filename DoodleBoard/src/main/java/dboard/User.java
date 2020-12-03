@@ -25,9 +25,11 @@ public class User implements UserDetails {
     private Long id;
 
     @Column(unique = true)
-    private final String username;
+    private String username;
     private final String password;
     private final String email;
+    private String fullname;
+    private String bio;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

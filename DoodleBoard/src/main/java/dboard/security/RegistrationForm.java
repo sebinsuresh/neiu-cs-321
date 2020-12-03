@@ -27,7 +27,18 @@ public class RegistrationForm {
     @Pattern(regexp = "[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+", message="Format your email correctly (email@provider.tld)")
     private String email;
 
+    @NotNull(message = "The name cannot be empty")
+    @NotEmpty(message = "The name cannot be empty")
+    private String fullname;
+
+    private String bio;
+
     public User toUser(PasswordEncoder passwordEncoder){
-        return new User(this.username, passwordEncoder.encode(this.password), this.email);
+        User newUser = new User(passwordEncoder.encode(this.password), this.email);
+        newUser.setUsername(this.username);
+        newUser.setFullname(this.fullname);
+        if(this.bio != null)
+            newUser.setBio(this.bio);
+        return newUser;
     }
 }

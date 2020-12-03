@@ -97,7 +97,7 @@ function draw() {
     drawPalette();
     handleMouse();
 
-    text(~~frameRate(), 20, 20); // DEBUG PERFORMANCE
+    // text(~~frameRate(), 20, 20); // DEBUG PERFORMANCE
 }
 
 // Calculate some of the UI related stuff - canvas size, pixel size,

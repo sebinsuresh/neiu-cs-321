@@ -22,9 +22,10 @@
             <span class="row text-danger col-10 col-lg-7 offset-lg-4 text-left"
                   th:if="${#fields.hasErrors('username')}"
                   th:errors="*{username}">placeholder error</span>
-            <label for="username" class="col-form-label text-left col-5 col-lg-3 offset-lg-1 pl-0">Username: </label>
+            <label for="username" class="col-form-label text-left col-5 col-lg-3 offset-lg-1 pl-0">Username*: </label>
             <input type="text" th:field="*{username}" id="username"
                    class="form-control col-10 col-lg-6"/>
+            <span class="row text-secondary col-10 col-lg-7 offset-lg-4 text-left">This will be used for logging into your account</span>
         </div>
 
         <div class="row form-group pl-5">
@@ -32,19 +33,38 @@
                   th:if="${#fields.hasErrors('email')}"
                   th:errors="*{email}">placeholder error</span>
             <label for="email"
-                   class="col-form-label text-left col-5 col-lg-3 offset-lg-1 pl-0">Email: </label>
+                   class="col-form-label text-left col-5 col-lg-3 offset-lg-1 pl-0">Email*: </label>
             <input type="text" th:field="*{email}" id="email"
                    class="form-control col-10 col-lg-6"/>
         </div>
 
-        <div class="row form-group pl-5">
+        <div class="row form-group pl-5 mb-4">
             <span class="row text-danger col-10 col-lg-7 offset-lg-4 text-left"
                   th:if="${#fields.hasErrors('password')}"
                   th:errors="*{password}">placeholder error</span>
             <label for="password"
-                   class="col-form-label text-left col-5 col-lg-3 offset-lg-1 pl-0">Password: </label>
+                   class="col-form-label text-left col-5 col-lg-3 offset-lg-1 pl-0">Password*: </label>
             <input type="password" th:field="*{password}" id="password"
                    class="form-control col-10 col-lg-6"/>
+        </div>
+
+        <hr/>
+
+        <div class="row form-group pt-3 pl-5 mt-2">
+            <span class="row text-danger col-10 col-lg-7 offset-lg-4 text-left"
+                  th:if="${#fields.hasErrors('fullname')}"
+                  th:errors="*{fullname}">placeholder error</span>
+            <label for="fullname" class="col-form-label text-left col-5 col-lg-3 offset-lg-1 pl-0">Your name*: </label>
+            <input type="text" th:field="*{fullname}" id="fullname"
+                   class="form-control col-10 col-lg-6"/>
+            <span class="row text-secondary col-10 col-lg-7 offset-lg-4 text-left">This will be shown on your profile.</span>
+        </div>
+
+        <div class="row form-group pt-3 pl-5">
+            <label for="bio" class="col-form-label text-left col-5 col-lg-3 offset-lg-1 pl-0">A short bio: </label>
+            <textarea th:field="*{bio}" id="bio"
+                   class="form-control col-10 col-lg-6"></textarea>
+            <span class="row text-secondary col-10 col-lg-7 offset-lg-4 text-left">Optional.</span>
         </div>
 
         <input type="submit"
