@@ -16,7 +16,7 @@ spring:
 
 doodlefeed:
   posts:
-    feedSize: 5
+    feedSize: 8
 
 server:
   error:

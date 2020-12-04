@@ -14,7 +14,6 @@ import java.util.Collection;
 
 @Entity
 @Data
-@NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
 @RequiredArgsConstructor
 public class User implements UserDetails {
 
@@ -26,8 +25,8 @@ public class User implements UserDetails {
 
     @Column(unique = true)
     private String username;
-    private final String password;
-    private final String email;
+    private String password;
+    private String email;
     private String fullname;
     private String bio;
 

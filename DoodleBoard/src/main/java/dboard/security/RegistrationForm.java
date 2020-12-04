@@ -34,7 +34,9 @@ public class RegistrationForm {
     private String bio;
 
     public User toUser(PasswordEncoder passwordEncoder){
-        User newUser = new User(passwordEncoder.encode(this.password), this.email);
+        User newUser = new User();
+        newUser.setPassword(passwordEncoder.encode(this.password));
+        newUser.setEmail(this.email);
         newUser.setUsername(this.username);
         newUser.setFullname(this.fullname);
         if(this.bio != null)
