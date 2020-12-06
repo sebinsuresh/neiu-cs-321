@@ -42,7 +42,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .hasRole("USER")
                 .and()
                     .authorizeRequests()
-                    .antMatchers("h2-console/**")
+                    .antMatchers("/register")
                     .permitAll()
                 .and()
                     .formLogin().loginPage("/login").defaultSuccessUrl("/feed")
