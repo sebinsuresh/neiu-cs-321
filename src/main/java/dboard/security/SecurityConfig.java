@@ -47,7 +47,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                     .formLogin().loginPage("/login").defaultSuccessUrl("/feed")
                 .and()
-                    .logout().logoutSuccessUrl("/");
+                    .logout().logoutSuccessUrl("/")
+                .and()
+                    .requiresChannel()
+                        .requestMatchers(r -> r.getHeader("X-Forwarded-Proto") != null)
+                        .requiresSecure();
 
         http.csrf().disable();
         http.headers().frameOptions().disable();
