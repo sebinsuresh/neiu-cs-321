@@ -39,7 +39,7 @@ public class DrawController {
                              Errors errors,
                              @AuthenticationPrincipal User user){
         if(errors.hasErrors()){
-            return "/draw";
+            return "draw";
         }
 
         doodleRepository.save(doodlepost.getContent());
