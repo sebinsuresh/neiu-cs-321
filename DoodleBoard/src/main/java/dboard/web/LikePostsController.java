@@ -46,6 +46,6 @@ public class LikePostsController {
         doodlePostRepo.save(likedPost);
         userRepo.save(user);
 
-        return "redirect:/"+page+"/page/"+(pageNum+1);
+        return "redirect:/" + page + "/page/" + (pageNum+1);
     }
 }

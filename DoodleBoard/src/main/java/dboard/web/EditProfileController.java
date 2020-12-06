@@ -3,7 +3,6 @@ package dboard.web;
 import dboard.User;
 import dboard.data.UserRepository;
 import dboard.security.RegistrationForm;
-import dboard.security.UserRepositoryUserDetailsService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -18,7 +17,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @Slf4j
 @Controller
