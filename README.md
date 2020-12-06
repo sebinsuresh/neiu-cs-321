@@ -11,7 +11,7 @@ Doodle Board
 
 ### Screenshots
 ![Screenshot of the website showing the feed page of the website](/src/main/resources/static/images/screenshot1.jpg?raw=true "Feed Page")
-![Screenshot of the website showing the doodle editing feature of the website with a drawing of a dragon](/src/main/resources/static/images/screenshot2.jpg?raw=true "Feed Page")
+![Screenshot of the website showing the doodle editing feature of the website with a drawing of a dragon](/src/main/resources/static/images/screenshot2.jpg?raw=true "Editing Doodles")
 
 ### Project Topic/Objective
 Doodle board is a pixel-art creation and gallery website. Users can create pixel-art in the browser in a 64x64 pixel canvas using 11 colors and transparent or white color pixels. The drawings are called “doodles” and the posts containing the doodles, their title, and other information are called “doodle posts”. Users can view the doodle posts created by other users, and create, update, and delete doodle posts of their own. The targeted user population is artistically inclined people of all ages, who happen to enjoy minimalistic and pixel art.
