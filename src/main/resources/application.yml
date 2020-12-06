@@ -9,7 +9,7 @@ spring:
       enabled: true
 
   datasource:
-    url: jdbc:h2:file:C:/Users/SEBIN/Desktop/programming/fall2020/cs321serverside/homework/neiu-cs-321/DoodleBoard/dboarddata
+    url: jdbc:h2:file:C:/Users/SEBIN/Desktop/programming/fall2020/cs321serverside/homework/neiu-cs-321/dboarddata
     username: admin
     password:
     driver-class-name: org.h2.Driver

@@ -32,7 +32,7 @@ public class User implements UserDetails {
     private String fullname;
     private String bio;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany
     private List<DoodlePost> likedPosts = new ArrayList<DoodlePost>();
 
     @Override
