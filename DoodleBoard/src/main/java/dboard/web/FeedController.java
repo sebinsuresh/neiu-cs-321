@@ -5,6 +5,7 @@ import dboard.Palette;
 import dboard.User;
 import dboard.data.DoodlePostRepository;
 import dboard.data.DoodleRepository;
+import dboard.data.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -28,18 +30,20 @@ public class FeedController {
 
     DoodlePostRepository doodlePostRepo;
     DoodleRepository doodleRepo;
+    UserRepository userRepo;
     private DoodlePostProperty doodlePostProperty;
 
     @Autowired
-    public FeedController(DoodlePostRepository dpr, DoodleRepository dr, DoodlePostProperty dpp){
+    public FeedController(DoodlePostRepository dpr, DoodleRepository dr, DoodlePostProperty dpp, UserRepository ur){
         this.doodlePostRepo = dpr;
         this.doodleRepo = dr;
         this.doodlePostProperty = dpp;
+        this.userRepo = ur;
     }
 
     @GetMapping(value = {"", "/", "/page/1"})
     public String showFeedPosts(Model model, @AuthenticationPrincipal User user){
-        addPostsToModel(model, 0);
+        addPostsToModel(model, 0, user);
         return "feed";
     }
 
@@ -55,13 +59,13 @@ public class FeedController {
                     HttpStatus.NOT_FOUND, "Page number out of bounds"
             );
         } else {
-            addPostsToModel(model, pageNum);
+            addPostsToModel(model, pageNum, user);
         }
 
         return "feed";
     }
 
-    public void addPostsToModel(Model model, int pageNum){
+    public void addPostsToModel(Model model, int pageNum, User user){
         long numPosts = doodlePostRepo.count();
         int feedSize = doodlePostProperty.getFeedSize();
 
@@ -74,6 +78,15 @@ public class FeedController {
         Pageable pageable = PageRequest.of(pageNum, feedSize);
         List<DoodlePost> allPosts = doodlePostRepo.findAllByOrderByPostedAtDesc(pageable);
         model.addAttribute("posts", allPosts);
+
+        List<DoodlePost> likedPosts = userRepo.findById(user.getId()).get().getLikedPosts();
+        List<Long> userLikedPostsIds = new ArrayList<>();
+        for(DoodlePost post : allPosts){
+            if(likedPosts.contains(post)){
+                userLikedPostsIds.add(post.getPostId());
+            }
+        }
+        model.addAttribute("likedPostIds", userLikedPostsIds);
     }
 
 }

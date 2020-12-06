@@ -84,6 +84,6 @@ public class EditProfileController {
         }
         userRepository.save(userFromDb);
 
-        return "redirect:/myposts";
+        return "redirect:/feed";
     }
 }

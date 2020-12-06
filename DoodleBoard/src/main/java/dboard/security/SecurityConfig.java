@@ -38,14 +38,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/draw","/submission",
                         "/myposts/**", "/feed/**",
-                        "/edit/**", "/editprofile")
+                        "/edit/**", "/editprofile", "/toggleLike/**")
                 .hasRole("USER")
                 .and()
                     .authorizeRequests()
                     .antMatchers("h2-console/**")
                     .permitAll()
                 .and()
-                    .formLogin().loginPage("/login").defaultSuccessUrl("/myposts")
+                    .formLogin().loginPage("/login").defaultSuccessUrl("/feed")
                 .and()
                     .logout().logoutSuccessUrl("/");
 

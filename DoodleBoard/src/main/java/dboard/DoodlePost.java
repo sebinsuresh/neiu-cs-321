@@ -71,7 +71,7 @@ public class DoodlePost {
     // Method to decrease the likes on the doodle by one.
     // Returns true if decrement was successful, false otherwise.
     public boolean decrLikes(){
-        if(this.numLikes > 1){
+        if(this.numLikes > 0){
             this.numLikes--;
             return true;
         }

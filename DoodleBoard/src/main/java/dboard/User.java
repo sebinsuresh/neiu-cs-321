@@ -9,8 +9,10 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Data
@@ -29,6 +31,9 @@ public class User implements UserDetails {
     private String email;
     private String fullname;
     private String bio;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    private List<DoodlePost> likedPosts = new ArrayList<DoodlePost>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
