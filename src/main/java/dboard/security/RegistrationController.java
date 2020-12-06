@@ -28,7 +28,7 @@ public class RegistrationController {
 
     @GetMapping
     public String registerForm(){
-        return "/register";
+        return "register";
     }
 
     @ModelAttribute
