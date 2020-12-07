@@ -14,7 +14,7 @@ public class RegistrationForm {
 
     @NotNull(message = "The username cannot be empty")
     @NotEmpty(message = "The username cannot be empty")
-    @Size(min=5, message="The username must be at least 5 characters")
+    @Size(min=4, message="The username must be at least 4 characters")
     private String username;
 
     @NotNull(message = "The password cannot be empty")
