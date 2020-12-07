@@ -40,7 +40,7 @@ public class RegistrationController {
     public String processRegistration(@SessionAttribute @Valid @ModelAttribute("registrationForm") RegistrationForm registrationForm,
                                     Errors errors){
         if(errors.hasErrors())
-            return "/register";
+            return "register";
 
         try{
             userRepo.save(registrationForm.toUser(passwordEncoder));
@@ -50,11 +50,11 @@ public class RegistrationController {
             errors.rejectValue("username",
                     "invalidUserName",
                     "Username already taken. Please try another username");
-            return "/register";
+            return "register";
 
         } catch (Exception ex){
             log.error("Exception: " + ex.getMessage());
-            return "/register";
+            return "register";
         }
     }
 }
