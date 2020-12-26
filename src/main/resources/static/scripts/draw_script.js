@@ -85,15 +85,15 @@ function draw() {
     drawPalette();
     handleMouse();
 
-    if(frameCount%30 == 0){
-        fr_reduced = ~~frameRate();
-    }
-    stroke(0);
-    strokeWeight(3)
-    fill(255);
-    textSize(40);
-    text(fr_reduced, 20, height - 160); // DEBUG PERFORMANCE
-    textSize(18);
+    // if(frameCount%30 == 0){
+    //     fr_reduced = ~~frameRate();
+    // }
+    // stroke(0);
+    // strokeWeight(3)
+    // fill(255);
+    // textSize(40);
+    // text(fr_reduced, 20, height - 160); // DEBUG PERFORMANCE
+    // textSize(18);
 }
 
 // Newer method to draw the canvas
