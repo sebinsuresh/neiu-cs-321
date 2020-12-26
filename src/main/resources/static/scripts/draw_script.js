@@ -147,7 +147,7 @@ function drawCanvas_new() {
     }
     if(numSquaresDrawn != pastNumDrawn){
         pastNumDrawn = numSquaresDrawn;
-        console.log(`Number of squares drawn in new drawCanvas: ${numSquaresDrawn}`);
+        // console.log(`Number of squares drawn in new drawCanvas: ${numSquaresDrawn}`);
     }
 }
 
@@ -174,7 +174,7 @@ function drawCanvas_old() {
             }
         }
     }
-    console.log(`Number of squares drawn in old drawCanvas: ${numSquaresDrawn}`);
+    // console.log(`Number of squares drawn in old drawCanvas: ${numSquaresDrawn}`);
 }
 
 // Calculate some of the UI related stuff - canvas size, pixel size,
