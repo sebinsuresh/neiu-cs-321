@@ -1,6 +1,7 @@
 let palette;
 let drawing; // 2d array of strings of hex colors
-let currentColIndex = 0, lastColIndex;
+let currentColIndex = 0,
+    lastColIndex;
 let isDrawing = false;
 let drawStrElem;
 let swatchSize = 50;
@@ -25,17 +26,17 @@ function setup() {
     cnv.parent(parentDiv);
 
     textSize(16);
-    textFont('consolas, courier new');
+    textFont("consolas, courier new");
 
     // Get palette hex values in an array
     palette = document.getElementById("plt").value;
     palette = palette.substring(1, palette.length - 1).split(", ");
 
     for (let i = 0; i < palette.length; i++) {
-        palette[i] = Number("0x" + palette[i].substring(1))
+        palette[i] = Number("0x" + palette[i].substring(1));
     }
     // palette = Int32Array.from(palette);
-    palette[11] = 0xFFFFFF;
+    palette[11] = 0xffffff;
 
     initializeDrawingArray();
     // noLoop()
@@ -56,20 +57,21 @@ function initializeDrawingArray() {
     lastColIndex = drawing[0][0];
 }
 
+let fr_reduced = 0;   // framerate reduced
 // P5js' draw() function will iterate 60 times per second.
 function draw() {
     calcUI(parentDiv);
     background(255);
 
     noStroke();
-    fill(20,20,30);
+    fill(20, 20, 30);
 
     if (!smallerUI) {
-        text('◀ ▶ L/R arrow keys to switch colors.', drawStartX, height - 50);
-        text('🖱   L/R click to Draw/Erase.', drawStartX, height - 30);
-        text('🔄  Refresh page to reset.', drawStartX, height - 10);
+        text("◀ ▶ L/R arrow keys to switch colors.", drawStartX, height - 50);
+        text("🖱   L/R click to Draw/Erase.", drawStartX, height - 30);
+        text("🔄  Refresh page to reset.", drawStartX, height - 10);
     } else {
-        text('🔄  Refresh page to reset.', drawStartX, height - 10);
+        text("🔄  Refresh page to reset.", drawStartX, height - 10);
     }
 
     stroke(0);
@@ -77,27 +79,102 @@ function draw() {
     square(drawStartX, drawStartY, drwRegionW);
 
     // drawCheckerBoard(drawStartX, drawStartY, drwRegionW, drwRegionW);     // Draw the white & gray checkerboard pattern
-    fill(150)
-    noStroke();
-    for (let i = 0; i < drawing.length; i++) {
-        for (let j = 0; j < drawing[i].length; j++) {
-            let colIndex = drawing[i][j];
-            if(colIndex != lastColIndex){
-                lastColIndex = colIndex;
-                let col = palette[colIndex];
-                fill((col & 0xFF0000) >> 16, (col & 0xFF00) >> 8, col & 0xFF);
-            }
-
-            if (colIndex != 11) { // Transparent pixels
-
-                square(drawStartX + (i * pxSize), drawStartY + (j * pxSize), pxSize);
-            }
-        }
-    }
+    //   fill(150);
+    // drawCanvas_old();
+    drawCanvas_new();
     drawPalette();
     handleMouse();
 
-    // text(~~frameRate(), 20, 20); // DEBUG PERFORMANCE
+    if(frameCount%30 == 0){
+        fr_reduced = ~~frameRate();
+    }
+    stroke(0);
+    strokeWeight(3)
+    fill(255);
+    textSize(40);
+    text(fr_reduced, 20, height - 160); // DEBUG PERFORMANCE
+    textSize(18);
+}
+
+// Newer method to draw the canvas
+// This version should only draw a rectangle when the color changes
+// Maximum number of draws: 4096
+// Min number: 64? if each row is one color
+let pastNumDrawn = 0;
+function drawCanvas_new() {
+    noStroke();
+    let numSquaresDrawn = 0;
+    let lastColorIndex = drawing[0][0];
+    let lastColumn = 0;
+    let lastRow = 0;
+    for (let i = 0; i <= drawing.length; i++) {
+        if (i > 0 && lastColorIndex != 11) {
+            // You hit a new row
+            let col = palette[lastColorIndex];
+            fill((col & 0xff0000) >> 16, (col & 0xff00) >> 8, col & 0xff);
+            rect(
+                drawStartX + lastColumn * pxSize,
+                drawStartY + lastRow * pxSize,
+                (64 - lastColumn) * pxSize,
+                pxSize
+            );
+            numSquaresDrawn++;
+            lastRow = i;
+            lastColumn = 0;
+            lastColorIndex = drawing[0][i];
+        }
+        // iterating over cells in that row
+        for (let j = 0; i < 64 && j < drawing[i].length; j++) {
+            let colorIndex = drawing[j][i];
+            if (colorIndex != lastColorIndex) {
+                // Draw the changes
+                let col = palette[lastColorIndex];
+                fill((col & 0xff0000) >> 16, (col & 0xff00) >> 8, col & 0xff);
+                rect(
+                    drawStartX + lastColumn * pxSize,
+                    drawStartY + i * pxSize,
+                    (j - lastColumn) * pxSize,
+                    pxSize
+                );
+                numSquaresDrawn++;
+
+                // Update the new values
+                lastColorIndex = colorIndex;
+                lastColumn = j;
+                lastRow = i; // this line should not be necessary
+            }
+        }
+    }
+    if(numSquaresDrawn != pastNumDrawn){
+        pastNumDrawn = numSquaresDrawn;
+        console.log(`Number of squares drawn in new drawCanvas: ${numSquaresDrawn}`);
+    }
+}
+
+// Draws the main canvas where the drawing happens
+// Maximum number of draws: 4096
+// Minimum number of draws, if there are no transparent: 4096
+function drawCanvas_old() {
+    noStroke();
+    let numSquaresDrawn = 0;
+    for (let i = 0; i < drawing.length; i++) {
+        for (let j = 0; j < drawing[i].length; j++) {
+            let colIndex = drawing[i][j];
+            if (colIndex != lastColIndex) {
+                lastColIndex = colIndex;
+                let col = palette[colIndex];
+                fill((col & 0xff0000) >> 16, (col & 0xff00) >> 8, col & 0xff);
+            }
+
+            if (colIndex != 11) {
+                // Transparent pixels
+
+                square(drawStartX + i * pxSize, drawStartY + j * pxSize, pxSize);
+                numSquaresDrawn++;
+            }
+        }
+    }
+    console.log(`Number of squares drawn in old drawCanvas: ${numSquaresDrawn}`);
 }
 
 // Calculate some of the UI related stuff - canvas size, pixel size,
